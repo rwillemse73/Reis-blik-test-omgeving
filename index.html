@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reisblik</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#26353a">
+<link rel="stylesheet" href="css/reisblik.css?v=9.9.52">
+<style>
+  body.start-page{background:#f3f0e8;color:#17384a;margin:0;font-family:Arial,sans-serif;}
+  .start-wrap{max-width:920px;margin:28px auto;padding:0 20px;}
+  .start-card{background:#fff;border:1px solid #cfd8dc;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin:18px 0;overflow:hidden;}
+  .start-card-head{padding:18px 20px;border-bottom:1px solid #dfe4e6;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:space-between;}
+  .start-card-body{padding:18px 20px;}
+  .start-vakantie-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .start-vakantie-row label{font-weight:700;font-size:18px;}
+  .start-select{font-size:18px;font-weight:600;padding:10px 14px;border:1px solid #aebdc4;border-radius:12px;background:#fff;min-width:310px;color:#17384a;}
+  .start-button{background:#26353a;color:#fff;border:0;border-radius:11px;padding:11px 18px;font-size:16px;font-weight:600;cursor:pointer;}
+  .start-status{margin-top:10px;color:#61747d;font-size:14px;}
+  .start-parts{margin:16px 0;padding:14px;border:1px solid #d8dfe2;border-radius:10px;background:#f8faf9;}
+  .start-part{display:inline-flex;gap:7px;margin:6px 16px 6px 0;}
+  .start-actions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
+  .start-mini{padding:7px 11px;border:1px solid #aebdc4;border-radius:8px;background:#fff;color:#17384a;cursor:pointer;font-weight:600;}
+  .start-intro{text-align:center;margin-bottom:26px;}
+  .start-intro h1{margin:0 0 8px;font-size:32px;}
+  .start-intro p{margin:0;color:#61747d;font-size:17px;}
+  .start-arrow{font-size:18px;color:#68777d;}
+</style>
+</head>
+<body class="start-page">
+<div class="start-wrap">
+  <div class="start-app-header">
+    <div class="start-app-title-row">
+      <h1>Reisblik <span class="version-inline">app v9.9.52</span></h1>
+    </div>
+    <div id="startCurrentDateTime" class="start-app-datetime"></div>
+    <div id="startOfflineStatus" class="start-app-offline" aria-live="polite">🟢 Online</div>
+    <div class="start-app-tagline-row">
+      <img src="data:image/png;base64,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" alt="Reisblik logo" class="start-app-logo">
+      <div>De app voor vastleggen van reisinfo</div>
+    </div>
+    <div class="start-intro-text">Kies eerst welke reiscontext je wilt openen.</div>
+  </div>
+
+  <section class="start-card">
+    <div class="start-card-head"><span>🧳 Actieve vakantie</span><span class="start-arrow">▼</span></div>
+    <div class="start-card-body">
+      <div class="start-vakantie-row">
+        <label for="startVacationSelect">Vakantie:</label>
+        <select id="startVacationSelect" class="start-select"></select>
+        <button id="startOpenBtn" class="start-button" type="button">Open actieve vakantie</button>
+      <div class="start-actions" style="margin-top:10px;">
+        <button id="startShowVacationBtn" class="start-button" type="button">📖 Toon vakantie</button>
+        <button id="startMijnReisdagBtn" class="start-button" type="button">📖 Open mijn reis-dag</button>
+      </div>
+      </div>
+      <div id="startParts" class="start-parts" hidden></div>
+      <div id="startVacationStatus" class="start-status"></div>
+    </div>
+  </section>
+
+  <section class="start-card">
+    <div class="start-card-head"><span>📚 Vakantiearchief</span><span class="start-arrow">▼</span></div>
+    <div class="start-card-body">
+      <div class="start-vakantie-row">
+        <label for="startArchiveSelect">Vakantie:</label>
+        <select id="startArchiveSelect" class="start-select"></select>
+        <button id="startArchiveBtn" class="start-button" type="button">Open archiefvakantie</button>
+      </div>
+      <div id="startArchiveStatus" class="start-status"></div>
+    </div>
+  </section>
+
+  <section class="start-card">
+    <button class="start-card-head start-card-toggle" id="startManageToggle" type="button" aria-expanded="false">
+      <span>⚙️ Reisblik Beheer</span><span class="start-arrow">▼</span>
+    </button>
+    <div class="start-card-body" id="startManageBody" hidden>
+      <p class="start-status" style="margin-top:0">App-brede functies. Deze blijven op deze startpagina.</p>
+      <div class="start-management-block">
+        <div class="start-management-title">💾 Backup</div>
+        <div class="start-actions">
+          <button id="backupOpenBtn" class="start-button" type="button">💾 Backup content</button>
+          <button id="restoreOpenBtn" class="start-button" type="button">♻️ Backup terugzetten</button>
+        </div>
+      </div>
+      <div class="start-management-block">
+        <div class="start-management-title">🔧 Onderhoud</div>
+        <div class="start-actions">
+          <button type="button" class="start-button" id="repairReisblikBtn">🔧 Reisblik repareren</button>
+          <button type="button" class="start-button" id="diagnoseReisblikBtn">🔍 Technische diagnose</button>
+        </div>
+      </div>
+      <div class="start-management-block">
+        <div class="start-management-title">
+          🧪 Testfuncties
+          <label class="panel-switch" title="Testfuncties tonen/verbergen">
+            <input type="checkbox" id="testFunctionsToggle" checked>
+            <span class="panel-switch-slider" aria-hidden="true"></span>
+          </label>
+        </div>
+        <div id="testFunctionsBody">
+          <div class="start-test-row">
+            <button id="clearStorageBtn" class="start-button" type="button">🗑️ Alle lokale gegevens wissen</button>
+            <button id="startTestPositionBtn" class="start-button" type="button">🧪 Testpositie</button>
+          </div>
+          <div class="start-test-row">
+            <input id="testAddress" class="start-test-input" placeholder="Adres voor testpositie…">
+            <button id="startTestAddressBtn" class="start-button" type="button">🔎 Adres zoeken</button>
+          </div>
+          <div id="testAddressStatus31" class="start-status"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div id="backupModal" class="start-overlay" style="display:none" role="dialog" aria-modal="true">
+<div class="start-modal"><h2>💾 Backup content</h2><p>Maak een backup van je persoonlijke Reisblik-gegevens.</p>
+<div class="backup-list"><div>✓ Bezocht</div><div>✓ Bezoekdatum en tijd</div><div>✓ Extra informatie</div><div>✓ Eigen locaties</div><div>✓ Persoonlijke notities</div><div>✓ Opgeslagen Agenda-evenementen</div></div>
+<div class="start-actions"><button id="backupCreateBtn" class="start-button" type="button">💾 Backup maken</button><button id="backupCloseBtn" class="start-button" type="button">Sluiten</button></div><div id="backupStatus" class="start-status"></div></div></div>
+<div id="restoreModal" class="start-overlay" style="display:none" role="dialog" aria-modal="true">
+<div class="start-modal"><h2>♻️ Backup terugzetten</h2><p>Kies een eerder gemaakte Reisblik-contentbackup.</p>
+<input id="restoreFile" type="file" accept="application/json,.json" style="display:block;margin:10px 0;width:100%"><div id="restorePreview" class="start-status"></div>
+<div class="start-actions"><button id="restoreConfirmBtn" class="start-button" type="button" disabled>♻️ Backup terugzetten</button><button id="restoreCloseBtn" class="start-button" type="button">Sluiten</button></div><div id="restoreStatus" class="start-status"></div></div></div>
+<div id="clearStorageModal" class="start-overlay" style="display:none" role="dialog" aria-modal="true">
+<div class="start-modal"><h2>🗑️ Alle lokale gegevens wissen</h2><p><strong>Let op:</strong> hiermee wordt de volledige localStorage van Reisblik op dit apparaat gewist.</p>
+<div class="start-actions"><button id="clearStorageConfirmBtn" class="start-button" type="button">🗑️ Alles wissen</button><button id="clearStorageCancelBtn" class="start-button" type="button">Annuleren</button></div></div></div>
+<script src="js/vakantie.js"></script>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  async function init(){
+    const select=$('startVacationSelect'), partsHost=$('startParts');
+    try{
+      const r=await fetch('config/vakanties.json',{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status);
+      const data=await r.json(); const vs=Array.isArray(data.vakanties)?data.vakanties:[];
+      window.reisblikVakantie.setVakanties(vs);
+      select.innerHTML=vs.map(v=>'<option value="'+esc(v.id)+'">'+esc(v.naam)+'</option>').join('');
+      const active=window.reisblikVakantie.getActieveVakantieId(); if(active) select.value=active;
+      function renderParts(){
+        const v=window.reisblikVakantie.getVakanties().find(x=>x.id===select.value);
+        const ps=Array.isArray(v?.onderdelen)?v.onderdelen:[];
+        if(!ps.length){partsHost.hidden=true;partsHost.innerHTML='';return;}
+        const selected=window.reisblikVakantie.getGeselecteerdeOnderdeelIds();
+        partsHost.hidden=false;
+        partsHost.innerHTML='<strong>Welke plaatsen / etappes wil je zien?</strong><br>'+ps.map(p=>'<label class="start-part"><input type="checkbox" data-part="'+esc(p.id)+'" '+(selected.includes(String(p.id))?'checked':'')+'> '+esc(p.naam||p.id)+'</label>').join('')+'<div class="start-actions"><button class="start-mini" id="allParts">Alles aan</button><button class="start-mini" id="noParts">Alles uit</button></div>';
+        const save=()=>window.reisblikVakantie.setGeselecteerdeOnderdeelIds([...partsHost.querySelectorAll('[data-part]:checked')].map(x=>x.dataset.part));
+        partsHost.querySelectorAll('[data-part]').forEach(x=>x.addEventListener('change',save));
+        $('allParts').onclick=()=>{partsHost.querySelectorAll('[data-part]').forEach(x=>x.checked=true);save();};
+        $('noParts').onclick=()=>{partsHost.querySelectorAll('[data-part]').forEach(x=>x.checked=false);save();};
+      }
+      select.onchange=renderParts; renderParts();
+      $('startOpenBtn').onclick=()=>{const id=select.value; const ids=[...partsHost.querySelectorAll('[data-part]:checked')].map(x=>x.dataset.part); if(window.reisblikVakantie.kiesVakantieMetOnderdelen(id,ids)){location.href='app.html#open';}};
+      $('startShowVacationBtn').onclick=()=>{const id=select.value; const ids=[...partsHost.querySelectorAll('[data-part]:checked')].map(x=>x.dataset.part); if(window.reisblikVakantie.kiesVakantieMetOnderdelen(id,ids)){location.href='app.html#showVacation';}};
+    }catch(e){$('startVacationStatus').textContent='Vakanties konden niet worden geladen: '+e.message;}
+    try{
+      const r=await fetch('archief/archief.json?v='+Date.now(),{cache:'no-store'}); if(!r.ok) throw new Error('HTTP '+r.status);
+      const d=await r.json(); const a=Array.isArray(d.archieven)?d.archieven:[];
+      $('startArchiveSelect').innerHTML=a.length?a.map(x=>'<option value="'+esc(x.bestand||'')+'">'+esc(x.naam||x.id||'Archief')+'</option>').join(''):'<option value="">— nog geen archieven —</option>';
+      $('startArchiveBtn').onclick=()=>{const f=$('startArchiveSelect').value;if(f)location.href='archief/'+f;};
+    }catch(e){$('startArchiveSelect').innerHTML='<option value="">— archief kon niet worden geladen —</option>';}
+    const manageToggle=$('startManageToggle'), manageBody=$('startManageBody');
+    manageToggle.onclick=()=>{const open=manageBody.hidden;manageBody.hidden=!open;manageToggle.setAttribute('aria-expanded',open?'true':'false');manageToggle.querySelector('.start-arrow').textContent=open?'▲':'▼';};
+    $('testFunctionsToggle').addEventListener('change',e=>{$('testFunctionsBody').hidden=!e.target.checked;});
+    $('startTestPositionBtn').onclick=()=>{localStorage.setItem('reisblik_test_position_v1',JSON.stringify({lat:52.719804,lon:4.878203,label:'Testpositie'}));$('testAddressStatus31').textContent='✓ Testpositie opgeslagen.';};
+    $('startTestAddressBtn').onclick=async()=>{const input=$('testAddress'),status=$('testAddressStatus31'),address=input.value.trim();if(!address){status.textContent='Vul eerst een adres in.';return;}status.textContent='Adres wordt gezocht…';try{const r=await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q='+encodeURIComponent(address),{headers:{'Accept':'application/json'}});if(!r.ok)throw new Error();const d=await r.json();if(!d.length){status.textContent='Adres niet gevonden.';return;}const p={lat:Number(d[0].lat),lon:Number(d[0].lon),label:d[0].display_name};localStorage.setItem('reisblik_test_position_v1',JSON.stringify(p));status.textContent='✓ Gevonden en opgeslagen: '+p.label;}catch(e){status.textContent='Adres zoeken mislukt.';}};
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
+<script src="js/backup.js?v=9.9.21"></script><script src="js/restore.js?v=9.9.21"></script><script src="js/clear-local-storage.js"></script><script src="js/maintenance.js?v=9.9.52"></script>
+
+<script>
+(function(){
+  function updateStartDateTime(){
+    const el=document.getElementById('startCurrentDateTime');
+    if(!el)return;
+    const d=new Date();
+    const pad=n=>String(n).padStart(2,'0');
+    el.textContent=pad(d.getDate())+'-'+pad(d.getMonth()+1)+'-'+d.getFullYear()+' · '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+  }
+  function updateStartOnline(){
+    const el=document.getElementById('startOfflineStatus');
+    if(!el)return;
+    el.textContent=navigator.onLine?'🟢 Online':'🟠 Offline – GPS kan blijven werken';
+    el.style.color=navigator.onLine?'#176b3a':'#9a5b00';
+  }
+  updateStartDateTime(); updateStartOnline();
+  setInterval(updateStartDateTime,1000);
+  window.addEventListener('online',updateStartOnline);
+  window.addEventListener('offline',updateStartOnline);
+})();
+  document.getElementById('startMijnReisdagBtn')?.addEventListener('click',()=>{location.href='mijn-reisdag.html';});
+</script>
+</body>
+</html>

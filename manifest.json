@@ -1,0 +1,27 @@
+{
+  "name": "Reisblik – Mijn Reisdagboek",
+  "short_name": "Reisblik",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#26353a",
+  "lang": "nl",
+  "description": "Reisblik – mijn reisdagboek en locatie-app.",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "logo/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

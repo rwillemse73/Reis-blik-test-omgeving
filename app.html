@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reisblik</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#26353a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Reis locatie">
+
+
+<link rel="stylesheet" href="css/reisblik.css?v=9.9.44">
+<style>#reisblikHub{display:none !important;}</style>
+<style>
+.hub-part-actions button{color:#17384a;background:#fff;border:1px solid #aebdc4;font-weight:600;}
+</style>
+</head>
+<body class="reisblik-werkruimte">
+<header><h1>Reisblik <span class="version-inline">app v9.9.44</span></h1><div class="sub"></div><div id="currentDateTime" style="margin-top:6px;font-size:12px;color:#6c777b"></div>
+<div id="offlineStatus" aria-live="polite" style="margin-top:5px;font-size:12px;font-weight:600;color:#176b3a">🟢 Online</div>
+<div class="app-tagline-row">
+  <img src="data:image/png;base64,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" alt="Reisblik logo" class="app-header-logo">
+  <div style="font-size:18px;font-weight:600;color:#17384a">De app voor vastleggen van reisinfo</div>
+</div>
+<div id="vakantieKeuze" class="vakantie-keuze legacy-vakantie-keuze">
+  <label for="vakantieSelect"><strong>Vakantie:</strong></label>
+  <select id="vakantieSelect" aria-label="Actieve vakantie">
+    <option value="">Vakanties worden geladen…</option>
+  </select>
+  <div id="vakantieStatus" class="vakantie-status" aria-live="polite"></div>
+  <div id="vakantieGeselecteerdeOnderdelen" class="vakantie-geselecteerde-onderdelen" hidden aria-live="polite"></div>
+</div>
+</header>
+
+<div id="reisblikHub" class="reisblik-hub">
+  <div class="hub-intro">
+    <h2>🌍 Reisblik</h2>
+    <p>Kies eerst wat je wilt openen.</p>
+  </div>
+
+  <section class="hub-section hub-vakantie-layout">
+    <div class="hub-vakantie-head">
+      <label class="hub-vakantie-label" for="hubVacationSelect">Vakantie:</label>
+      <select id="hubVacationSelect" class="hub-select"></select>
+    </div>
+    <div class="hub-section-body" id="hubActiveBody">
+      <div id="hubParts" class="hub-parts" hidden></div>
+      <button id="hubOpenVacationBtn" class="hub-primary" type="button">Open actieve vakantie</button>
+      <div id="hubVacationStatus" class="hub-status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="hub-section hub-vakantie-layout hub-archief-layout">
+    <div class="hub-vakantie-head">
+      <label class="hub-vakantie-label" for="hubArchiveSelect">📚 Vakantiearchief:</label>
+      <select id="hubArchiveSelect" class="hub-select">
+        <option value="">— laden… —</option>
+      </select>
+    </div>
+    <div class="hub-section-body" id="hubArchiveBody">
+      <button id="hubOpenArchiveBtn" class="hub-primary" type="button">Open archiefvakantie</button>
+      <div id="hubArchiveStatus" class="hub-status"></div>
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <button class="hub-section-toggle" type="button" id="hubManageToggle" aria-expanded="false">
+      <span>⚙️ Reisblik Beheer</span><span class="hub-chevron">▼</span>
+    </button>
+    <div class="hub-section-body" id="hubManageBody" hidden>
+      <p class="hub-status">App-brede functies. Deze staan los van de actieve vakantie.</p>
+
+      <div class="backup-management-block" id="backupManagementFunctions">
+        <div class="maintenance-title"><span>💾 Backup</span></div>
+        <div class="maintenance-buttons">
+          <button id="backupOpenBtn" class="backup-btn" type="button">💾 Backup content</button>
+          <button id="restoreOpenBtn" class="backup-btn" type="button">♻️ Backup terugzetten</button>
+        </div>
+      </div>
+
+      <div class="test-functions hub-management-block" id="testFunctions">
+        <div class="test-title">
+          <span>🧪 Testfuncties</span>
+          <label class="panel-switch" title="Testfuncties tonen/verbergen">
+            <input type="checkbox" id="testFunctionsToggle" checked>
+            <span class="panel-switch-slider" aria-hidden="true"></span>
+          </label>
+        </div>
+        <div id="testFunctionsBody">
+          <div class="test-controls" id="testFunctionsControls">
+            <div class="test-control-row">
+              <button id="clearStorageBtn" class="cleanup-btn" type="button">🗑️ Alle lokale gegevens wissen</button>
+              <button type="button" onclick="testPosition()">🧪 Testpositie</button>
+            </div>
+            <div class="test-control-row">
+              <input id="testAddress" placeholder="Adres voor testpositie…">
+              <button type="button" onclick="searchTestAddress31()">🔎 Adres zoeken</button>
+            </div>
+            <div class="test-control-row">
+              <button type="button" onclick="openHtmlPathDebug()">🔎 HTML-pad diagnose</button>
+            </div>
+          </div>
+          <div id="testAddressStatus31" class="status"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="nearbyBar" style="background:#fff;border-bottom:1px solid #ddd;padding:10px 14px">
+  <div style="font-size:12px;color:#6c777b;margin-bottom:5px">Locaties binnen 500 meter</div>
+  <div id="nearbyList" style="font-weight:600">Je locatie wordt nog bepaald…</div>
+</div>
+<div id="map"></div>
+<div class="panel">
+<div class="hub-back-row" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;"><button id="hubBackBtn" type="button">← Terug naar startscherm</button><button id="hubMijnReisdagBtn" type="button">📖 Mijn reisdag</button></div>
+<div class="user-functions">
+  <div class="user-buttons">
+    <button onclick="showAll()">🗺️ Geselecteerde locaties</button>
+    <button onclick="openAddLocation()">➕ Locatie toevoegen</button>
+      </div>
+  <div class="user-secondary-buttons">
+    <div class="user-buttons reisdag-main-buttons">
+      <button id="reisdagOpenBtn" class="reisdag-btn" type="button">📅 Mijn reisdag</button>
+      <button id="notesOpenBtn" class="reisdag-btn notes-btn" type="button">📝 Aantekeningen</button>
+      <button id="dayReportOpenBtn" class="reisdag-btn notes-btn" type="button">📝 Dagverslag</button>
+    </div>
+    <div class="user-buttons reisdag-quick-buttons">
+      <button id="agendaOpenBtn" class="agenda-btn" type="button">📅 Agenda</button>
+      <button id="quizOpenBtn" class="quiz-btn" type="button">🧠 Reisquiz</button>
+      <button id="searchContentBtn" class="backup-btn" type="button">🔎 Zoeken</button>
+      <button id="helpOpenBtn" class="backup-btn" type="button">❓ Help</button>
+    </div>
+  </div>
+</div>
+
+<div id="reisdagResultsHost"></div>
+
+
+
+
+
+<div class="maintenance-functions" id="maintenanceFunctions">
+  <div class="maintenance-title">
+    <span>Onderhoudsfuncties</span>
+    <label class="panel-switch" title="Onderhoudsfuncties tonen/verbergen">
+      <input type="checkbox" id="maintenanceToggle" checked>
+      <span class="panel-switch-slider" aria-hidden="true"></span>
+    </label>
+  </div>
+  <div id="maintenanceFunctionsBody">
+    <div class="maintenance-buttons">
+      <button type="button" onclick="loadNewLocalHtmlLocationsManual()">📂 Nieuwe-lok inlezen</button>
+      <button id="archiveVacationBtn" class="backup-btn" type="button">📦 Vakantie archiveren</button>
+      <button type="button" class="backup-btn" onclick="window.location.href='archief/'">📚 Vakantiearchief</button>
+      <button type="button" onclick="exportLocalLocationsTxt()">📦 Lokale locaties exporteren</button>
+      <button id="offlinePrepareBtn" class="backup-btn" type="button">📥 Vakantie offline beschikbaar maken</button>
+    </div>
+  </div>
+</div>
+
+<div id="offlinePrepareModal" class="reisdag-overlay" style="display:none;z-index:1200;">
+  <div class="reisdag-modal" style="max-width:520px;">
+    <h2>📥 Vakantie offline beschikbaar maken</h2>
+    <p>Kies een vakantie. Reisblik haalt de bijbehorende lokale vakantiegegevens op en bewaart ze op dit apparaat.</p>
+    <select id="offlineVacationSelect" style="width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;"></select>
+    <div id="offlinePrepareStatus" class="status" style="margin:10px 0;"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button id="offlinePrepareStartBtn" type="button">📥 Offline opslaan</button>
+      <button id="offlinePrepareCloseBtn" type="button">Sluiten</button>
+    </div>
+  </div>
+</div>
+
+<div id="dayReportModal" class="backup-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="dayReportTitle">
+  <div class="backup-modal notes-modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h2 id="dayReportTitle">📝 Dagverslag</h2>
+      <button id="dayReportCloseBtn" type="button" class="backup-secondary">Sluiten</button>
+    </div>
+    <p>Schrijf hier het algemene verslag van een reisdag. Het verslag wordt per datum bewaard en komt bij het maken van de reisdagboek-HTML aan het begin van die dag te staan.</p>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0">
+      <label for="dayReportDate"><strong>Reisdag</strong></label>
+      <input id="dayReportDate" type="date" style="padding:8px;border:1px solid #ccc;border-radius:8px">
+    </div>
+    <textarea id="dayReportInput" rows="9" placeholder="Hoe was deze dag? Wat hebben jullie gedaan, meegemaakt, gezien of ontdekt?" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px;font:inherit"></textarea>
+      <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap"><button id="dayReportMicBtn" type="button">🎙️ Spreek in</button><span id="dayReportMicStatus" style="font-size:12px;color:#667"></span></div>
+    <div class="backup-actions" style="margin-top:10px">
+      <button id="dayReportSaveBtn" type="button">💾 Dagverslag opslaan</button>
+      <button id="dayReportDeleteBtn" type="button" class="backup-secondary">🗑️ Dagverslag verwijderen</button>
+    </div>
+    <div id="dayReportStatus" class="backup-status" aria-live="polite"></div>
+    <h3 style="margin-top:18px">Opgeslagen dagverslagen</h3>
+    <div id="dayReportList" class="notes-list"></div>
+  </div>
+</div>
+<div id="notesModal" class="backup-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="notesTitle">
+  <div class="backup-modal notes-modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h2 id="notesTitle">📝 Aantekeningen</h2>
+      <button id="notesCloseBtn" type="button" class="backup-secondary">Sluiten</button>
+    </div>
+    <p>Losse aantekeningen voor de actieve vakantie: <strong id="notesVacationName"></strong></p>
+    <textarea id="notesInput" rows="6" placeholder="Schrijf hier een losse aantekening…" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px;font:inherit"></textarea>
+    <div class="backup-actions" style="margin-top:10px">
+      <button id="notesSaveBtn" type="button">📝 Aantekening opslaan</button>
+    </div>
+    <div id="notesStatus" class="backup-status" aria-live="polite"></div>
+    <h3 style="margin-top:18px">Opgeslagen aantekeningen</h3>
+    <div id="notesEmpty" class="notes-empty">Nog geen losse aantekeningen voor deze vakantie.</div>
+    <div id="notesList" class="notes-list"></div>
+  </div>
+</div>
+<div id="reisdagOverlay" class="reisdag-overlay" role="dialog" aria-modal="true" aria-labelledby="reisdagTitle">
+  <div class="reisdag-modal">
+    <h3 id="reisdagTitle">Mijn reisdag</h3>
+    <div>Kies de periode waarvoor je de reisdag wilt bekijken.</div>
+    <div class="reisdag-date-range">
+      <label for="reisdagDateFrom">Datum van</label>
+      <input id="reisdagDateFrom" type="date">
+      <label for="reisdagDateTo">Datum t/m</label>
+      <input id="reisdagDateTo" type="date">
+    </div>
+    <div class="reisdag-actions">
+      <button id="reisdagCancelBtn" type="button">Annuleren</button>
+      <button id="reisdagChooseBtn" type="button">Kies periode</button>
+    </div>
+    <div id="reisdagStatus" class="reisdag-status"></div>
+  </div>
+</div>
+
+<div id="reisdagMapOverlay" class="reisdag-map-overlay" role="dialog" aria-modal="true" aria-labelledby="reisdagMapTitle" style="display:none">
+  <div class="reisdag-map-modal">
+    <div class="reisdag-map-head">
+      <h3 id="reisdagMapTitle">🗺️ Mijn reisdag op kaart</h3>
+      <button id="reisdagMapCloseBtn" type="button" class="reisdag-map-close">Sluiten</button>
+    </div>
+    <div id="reisdagMapStatus" class="reisdag-map-status"></div>
+    <div id="reisdagMap" class="reisdag-map"></div>
+  </div>
+</div>
+<div id="status" class="status">Locaties worden geladen…</div>
+<div id="message"></div>
+<div id="locations"></div>
+</div>
+
+<div id="quizOverlay" class="quiz-overlay" role="dialog" aria-modal="true" aria-labelledby="quizTitle" style="display:none">
+  <div class="quiz-modal">
+    <div class="quiz-head">
+      <div><h2 id="quizTitle">🧠 Reisquiz</h2><div class="quiz-context" id="quizTitleContext"></div></div>
+      <button id="quizCloseBtn" type="button" class="quiz-close">Sluiten</button>
+    </div>
+    <div id="quizContent" class="quiz-content"></div>
+  </div>
+</div>
+
+<div id="agendaOverlay" class="agenda-overlay" role="dialog" aria-modal="true" aria-labelledby="agendaTitle" style="display:none">
+  <div class="agenda-modal">
+    <div class="agenda-head">
+      <h2 id="agendaTitle">📅 Agenda</h2>
+      <button id="agendaCloseBtn" type="button" class="agenda-close">Sluiten</button>
+    </div>
+    <p class="agenda-intro">De Agenda wordt de plek voor toekomstige activiteiten en evenementen. De vormgeving werken we later verder uit.</p>
+    <div class="agenda-section">
+      <h3>⭐ Mijn agenda</h3>
+      <div id="agendaEmpty" class="agenda-empty">Nog geen evenementen in Mijn agenda.</div>
+      <div id="agendaSavedEvents"></div>
+    </div>
+    <div class="agenda-section agenda-import-section">
+      <h3>📥 Nieuwe evenementen</h3>
+      <button id="agendaImportBtn" type="button" class="agenda-btn">📥 Importeer nieuwe evenementen</button>
+      <div id="agendaImportStatus" class="agenda-import-status"></div>
+      <div id="agendaImportedEmpty" class="agenda-empty">Nog geen nieuwe evenementen geïmporteerd.</div>
+      <div id="agendaImportedEvents"></div>
+    </div>
+    <div class="agenda-requirements">
+      <strong>Uitgangspunten evenementen zoeken</strong>
+      <p>Reisblik beoordeelt evenementen niet alleen op naam of categorie, maar onderzoekt ook wat er werkelijk te beleven is: makers/contact, verhaal en uitleg, kleinschaligheid, lokale/authentieke organisatie, bijzondere locatie, natuur/wandelen, vrijheid, onverwachte elementen, sociale situatie, onafhankelijke bezoekerservaringen, kwaliteit, reiswaardigheid en knutterigheid.</p>
+    </div>
+  </div>
+</div>
+<div id="backupModal" class="backup-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
+<div class="backup-modal">
+<h2 id="backupTitle">💾 Backup content</h2>
+<p>Maak een backup van je persoonlijke Reisblik-gegevens.</p>
+<div class="backup-list">
+<div>✓ Bezocht</div>
+<div>✓ Bezoekdatum en tijd</div>
+<div>✓ Extra informatie</div>
+<div>✓ Eigen locaties</div>
+<div>✓ Persoonlijke notities</div><div>✓ Opgeslagen Agenda-evenementen</div>
+</div>
+<div class="backup-actions">
+<button id="backupCreateBtn" type="button">💾 Backup maken</button>
+<button id="backupCloseBtn" type="button" class="backup-secondary">Sluiten</button>
+</div>
+<div id="backupStatus" class="backup-status" aria-live="polite"></div>
+</div></div>
+
+
+<div id="restoreModal" class="backup-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="restoreTitle">
+<div class="backup-modal">
+<h2 id="restoreTitle">♻️ Backup terugzetten</h2>
+<p>Kies een eerder gemaakte Reisblik-contentbackup. Alleen persoonlijke lokale gegevens uit de backup worden teruggezet.</p>
+<div class="backup-list"><div>✓ Bezocht</div><div>✓ Bezoekdatum en tijd</div><div>✓ Extra informatie</div><div>✓ Eenvoudige Extra informatie</div><div>✓ Persoonlijke notities</div><div>✓ Eigen locaties</div><div>✓ Opgeslagen Agenda-evenementen</div></div>
+<label for="restoreFile">Kies backupbestand</label>
+<input id="restoreFile" type="file" accept="application/json,.json" style="display:block;margin:10px 0;width:100%">
+<div id="restorePreview" class="backup-status" aria-live="polite"></div>
+<div class="backup-actions"><button id="restoreConfirmBtn" type="button" disabled>♻️ Backup terugzetten</button><button id="restoreCloseBtn" type="button" class="backup-secondary">Sluiten</button></div>
+<div id="restoreStatus" class="backup-status" aria-live="polite"></div>
+</div></div>
+<div id="clearStorageModal" class="cleanup-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="clearStorageTitle">
+  <div class="cleanup-modal">
+    <h2 id="clearStorageTitle">🗑️ Alle lokale gegevens wissen</h2>
+    <p><strong>Let op:</strong> hiermee wordt de volledige <code>localStorage</code> van Reisblik op dit apparaat gewist.</p>
+    <p>Dit verwijdert onder andere Bezocht, Extra informatie, persoonlijke notities, eigen locaties en <strong>opgeslagen Agenda-evenementen</strong>. De vaste HTML-content, <code>agenda.json</code> en de applicatiebestanden worden niet verwijderd.</p>
+    <div class="cleanup-actions">
+      <button id="clearStorageConfirmBtn" type="button">🗑️ Alles wissen</button>
+      <button id="clearStorageCancelBtn" type="button" class="cleanup-secondary">Annuleren</button>
+    </div>
+  </div>
+</div>
+<div id="addLocationModal" style="display:none;position:fixed;inset:0;background:#0008;z-index:3000;padding:14px;overflow:auto">
+<div style="background:#fff;border-radius:16px;padding:16px;max-width:650px;margin:20px auto">
+<h2>➕ Locatie toevoegen</h2>
+<p class="meta">Voeg een eigen locatie toe. Het adres wordt omgezet naar GPS-coördinaten.</p>
+<label>Naam</label>
+<input id="newName" placeholder="Bijvoorbeeld: Restaurant De Waag" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:9px">
+<label>Adres</label>
+<input id="newAddress" placeholder="Straat, huisnummer, postcode, plaats" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:9px">
+<label>Type</label>
+<select id="newType" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:9px"><option value="locaties">📍 Locaties</option>
+<option value="kunst">🎨 Kunst</option>
+<option value="winkels">🛍️ Winkels</option>
+<option value="horeca">🍴 Horeca</option>
+<option value="evenementen">📅 Evenementen</option></select>
+<label>Omschrijving</label>
+<textarea id="newDescription" rows="4" placeholder="Korte omschrijving van deze locatie..." style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px"></textarea>
+<label>
+<div class="field photo-field">
+  <label for="newLocationPhoto">📷 Foto toevoegen</label>
+  <input id="newLocationPhoto" type="file" accept="image/*">
+  <div id="newLocationPhotoPreview" style="margin-top:8px"></div>
+</div>
+
+Mijn verhaal / extra tekst</label>
+<textarea id="newStory" rows="5" placeholder="Vertel hier wat je over deze locatie wilt bewaren..." style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px"></textarea>
+<div id="geocodeResult" class="status">Kies een adres of gebruik je huidige locatie.</div>
+<button type="button" onclick="useCurrentLocation()">📍 Huidige locatie gebruiken</button><button type="button" onclick="findAddress()">📍 Adres zoeken</button>
+<button type="button" onclick="saveNewLocation()">Opslaan</button>
+<button type="button" onclick="closeAddLocation()" style="background:#e8e5df;color:#26353a">Annuleren</button>
+</div></div>
+<div id="editLocationModal" style="display:none;position:fixed;inset:0;background:#0008;z-index:3100;padding:14px;overflow:auto" role="dialog" aria-modal="true" aria-labelledby="editLocationTitle">
+<div style="background:#fff;border-radius:16px;padding:16px;max-width:650px;margin:20px auto">
+<h2 id="editLocationTitle">✏️ Locatie bewerken</h2>
+<p class="meta">Pas deze locatie volledig aan. Het adres kan opnieuw naar GPS-coördinaten worden gezocht.</p>
+<label>Naam</label>
+<input id="editName" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px">
+<label>Adres</label>
+<input id="editAddress" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px">
+<label>Type</label>
+<select id="editType" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px"><option value="locaties">📍 Locaties</option><option value="kunst">🎨 Kunst</option><option value="winkels">🛍️ Winkels</option><option value="horeca">🍴 Horeca</option><option value="evenementen">📅 Evenementen</option></select>
+<label>Omschrijving</label>
+<textarea id="editDescription" rows="4" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px"></textarea>
+<div class="field photo-field" style="margin-top:8px">
+<label for="editLocationPhoto">📷 Foto wijzigen</label>
+<input id="editLocationPhoto" type="file" accept="image/*">
+<div id="editLocationPhotoPreview" style="margin-top:8px"></div>
+</div>
+<label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-weight:400"><input id="editRemovePhoto" type="checkbox" style="width:auto"> Foto verwijderen</label>
+<label style="display:block;margin-top:8px">Mijn verhaal / extra tekst</label>
+<textarea id="editStory" rows="5" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:9px"></textarea>
+<div id="editGeocodeResult" class="status">Bestaande GPS-coördinaten worden behouden tenzij je een nieuwe locatie kiest.</div>
+<button type="button" onclick="useCurrentLocationForEdit()">📍 Huidige locatie gebruiken</button><button type="button" onclick="findAddressForEdit()">📍 Adres zoeken</button><button type="button" onclick="saveEditedLocation()">Opslaan</button><button type="button" onclick="closeEditLocation()" style="background:#e8e5df;color:#26353a">Annuleren</button>
+</div></div>
+<div id="simpleExtraModal" style="display:none;position:fixed;inset:0;background:#0008;z-index:3000;padding:15px">
+<div style="background:#fff;border-radius:15px;padding:16px;max-width:600px;margin:25px auto">
+<h2 id="simpleExtraTitle">➕ Extra informatie</h2>
+<label>Datum</label>
+<input id="simpleExtraDate" type="date" style="display:block;width:100%;box-sizing:border-box;padding:9px;margin:5px 0 10px">
+<label>Extra informatie</label>
+<textarea id="simpleExtraText" rows="5" placeholder="Schrijf hier je aanvullende informatie..." style="display:block;width:100%;box-sizing:border-box;padding:9px;margin:5px 0 10px"></textarea>
+<div class="speech-controls">
+<button type="button" id="simpleExtraSpeechBtn">🎤 Microfoon starten</button>
+<button type="button" id="simpleExtraSpeechStopBtn" class="speech-stop" style="display:none">⏹ Stop microfoon</button>
+</div>
+<div id="simpleExtraSpeechStatus" class="speech-status" aria-live="polite"></div>
+<button id="simpleExtraSaveBtn" type="button" onclick="saveSimpleExtra()">Opslaan</button>
+<button type="button" onclick="closeSimpleExtra()" style="background:#e8e5df;color:#26353a">Annuleren</button>
+</div></div>
+<div id="searchModal" class="search-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+  <div class="search-modal">
+    <h2 id="searchTitle">🔎 Zoeken</h2>
+    <label for="searchInput">Zoekwoord</label>
+    <input id="searchInput" type="search" placeholder="Typ een woord…" autocomplete="off">
+    <div class="search-actions">
+      <button id="searchStartBtn" type="button">🔎 Zoek</button>
+      <button id="searchCloseBtn" type="button" class="backup-secondary">Sluiten</button>
+    </div>
+    <div id="searchStatus" class="search-status"></div>
+    <div id="searchResults" class="search-results" aria-live="polite"></div>
+  </div>
+</div>
+<div id="helpModal" class="backup-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+<div class="backup-modal help-modal-content">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+    <h2 id="helpTitle">❓ Reisblik – Help</h2>
+    <button id="helpCloseBtn" type="button" class="backup-secondary">Sluiten</button>
+  </div>
+  <p><strong>Reisblik</strong> helpt je interessante plaatsen en evenementen te ontdekken, informatie vast te leggen en je eigen reiservaringen lokaal te bewaren.</p>
+
+  <h3>1. Geselecteerde locaties</h3>
+  <p>Toont de locaties van de geselecteerde categorieën op de kaart en in de lijst. De kaart gebruikt de beschikbare GPS-coördinaten.</p>
+
+  <h3>2. Locatie toevoegen</h3>
+  <p>Voeg zelf een locatie toe. Je kunt een naam, adres, type, omschrijving, foto en eigen verhaal bewaren. Het adres kan naar GPS worden omgezet of je kunt je huidige/testlocatie gebruiken.</p>
+
+  <h3>3. Eigen locatie bewerken</h3>
+  <p>Een lokaal opgeslagen eigen locatie kun je later volledig aanpassen. Naast de naam staat een <strong>✏️ potloodknop</strong>. Klik daarop om het bewerkscherm te openen.</p>
+  <ul>
+    <li>De bestaande <strong>naam</strong>, <strong>adres</strong>, <strong>type</strong>, <strong>omschrijving</strong> en <strong>mijn verhaal / extra tekst</strong> worden automatisch ingevuld.</li>
+    <li>Je kunt het <strong>type</strong> in dit scherm wijzigen. Het aparte veld <strong>Type wijzigen</strong> op de locatiekaart is daarom niet meer nodig.</li>
+    <li>De bestaande foto blijft behouden en wordt in het bewerkscherm getoond.</li>
+    <li>Je kunt een nieuwe foto kiezen of de bestaande foto verwijderen.</li>
+    <li>Je kunt het adres opnieuw laten zoeken of de huidige/testlocatie gebruiken om de GPS-coördinaten aan te passen.</li>
+    <li>Als je geen nieuwe locatie kiest, blijven de bestaande GPS-coördinaten behouden.</li>
+    <li>Bij opslaan blijft de bestaande locatie en context behouden; de gewijzigde gegevens worden direct in Reisblik bijgewerkt.</li>
+  </ul>
+
+  <h3>4. Mijn locatie</h3>
+  <p>Vraagt de browser om je actuele GPS-positie en gebruikt die om je positie op de kaart te tonen en afstanden tot locaties te berekenen.</p>
+
+  <h3>5. Mijn reisdag</h3>
+  <p>Met <strong>Mijn reisdag</strong> maak je op basis van je bestaande selectie van bezochte locaties een overzicht van een gekozen periode. Er wordt geen tweede selectie voor het reisdagboek gemaakt: de bestaande selectie is de bron.</p>
+  <ul>
+    <li>Kies een periode met <strong>Datum van</strong> en <strong>Datum t/m</strong>.</li>
+    <li>De resultaten worden op bezoekdatum en tijd weergegeven.</li>
+    <li>Bezochte evenementen worden net als locaties meegenomen.</li>
+    <li><strong>📄 Download DOC</strong> maakt het bestaande Word-compatibele document met de reisdaggegevens.</li>
+    <li><strong>📖 Maak-reis-HTML</strong> maakt een aparte reisdag met een reisboek-/tijdschriftopmaak: chronologische bezochte locaties en teksten volgens het nieuwe HTML-skelet. Voor iedere bezochte locatie wordt een apart <code>class="tekst-normaal"</code>-blok gemaakt met een <code>&lt;h2&gt;</code> voor de locatiekop, één <code>&lt;p&gt;</code> met alle tekst en de vaste twee FOTO-PLAATSEN. De kaart wordt niet in de gegenereerde HTML opgenomen.</li>
+    <li><strong>📖 Maak-reis-HTML</strong> gebruikt per bezochte locatie steeds dezelfde vaste grote foto, foto binnen de tekst en foto-onderschrift. Onderaan kolom 1 en kolom 3 blijven de diavoorstellingen met FOTO-PLAATSEN beschikbaar.</li>
+    <li><strong>📚 HTML per dag</strong> maakt bij een gekozen periode voor iedere dag waarop je daadwerkelijk een locatie of evenement hebt bezocht een afzonderlijk HTML-bestand. Dagen zonder bezochte locaties of evenementen worden overgeslagen. Kies bijvoorbeeld 1 augustus t/m 3 augustus: als je op 1 en 3 augustus iets hebt bezocht, maakt Reisblik twee losse HTML-bestanden, voor 1 en 3 augustus.</li>
+    <li><strong>👁️ Toon reisdag</strong> toont de bestaande reisdagweergave zodat je het resultaat direct kunt bekijken. Deze functie is niet gewijzigd.</li>
+    <li><strong>🗺️ Toon op kaart</strong> laat de geselecteerde bezochte punten op een aparte kaart zien.</li>
+    <li><strong>📝 Aantekeningen</strong> is een aparte plek voor losse aantekeningen die niet aan een locatie of evenement gekoppeld zijn. Ze worden lokaal per actieve vakantie opgeslagen en kunnen via <strong>Backup content</strong> worden meegenomen.</li>
+  </ul>
+  <p><strong>Belangrijk:</strong> de app heeft geen ingebouwde editor meer voor het reisdagboek. Met <strong>📖 Maak-reis-HTML</strong> maak je de reisdag-HTML, die je daarna buiten Reisblik verder kunt bewerken. De fotoplaatsen en diavoorstellingen zijn bedoeld om later zelf met je foto's te vullen.</p>
+  <p>De gegenereerde reisdagboek-HTML is bedoeld als zelfstandige reisboek-/tijdschriftpagina en kan onder meer de titel, datum, grote foto's, de sectie <strong>BEZOCHT</strong>, locatieblokken, verhalen, ervaringen, extra foto's en slideshows bevatten.</p>
+
+  <h3>6. Agenda</h3>
+  <h3>6a. Nieuwe startstructuur</h3>
+  <p>Bij het openen van Reisblik kies je eerst de context. Via <strong>✈️ Actieve vakantie</strong> kies je de vakantie. Heeft een vakantie meerdere plaatsen of etappes, dan kun je de onderdelen afzonderlijk aanvinken. <strong>📚 Vakantiearchief</strong> opent afgeronde vakanties rechtstreeks. <strong>⚙️ Reisblik Beheer</strong> bevat app-brede onderhoudsfuncties.</p>
+  <p>De Agenda is bedoeld voor toekomstige activiteiten en evenementen.</p>
+  <ul>
+    <li>De app zoekt zelf geen evenementen op internet.</li>
+    <li>Nieuwe evenementen komen binnen via <strong>📥 Importeer nieuwe evenementen</strong> vanuit <code>agenda/agenda.json</code>.</li>
+    <li>Bij import worden dubbele evenementen herkend en niet opnieuw als nieuw getoond.</li>
+    <li>Je bewaart een kandidaat met <strong>⭐ Bewaar in Mijn agenda</strong>.</li>
+    <li>Opgeslagen evenementen blijven lokaal op dit apparaat bewaard.</li>
+    <li>Een opgeslagen evenement kan met <strong>☑️ Bezocht</strong> als bezocht worden gemarkeerd.</li>
+    <li>Bezochte evenementen blijven onderdeel van je persoonlijke geschiedenis en zijn beschikbaar voor Mijn reisdag.</li>
+    <li>Een bezocht evenement kan niet direct worden verwijderd. Zet eerst <strong>Bezocht</strong> uit; daarna verschijnt de verwijdermogelijkheid.</li>
+    <li>De Agenda is opgedeeld in komende evenementen en een inklapbaar archief van bezochte/afgelopen evenementen.</li>
+    <li>In het archief staan de laatst bezochte evenementen bovenaan.</li>
+  </ul>
+
+  <h3>7. Reisquiz</h3>
+  <p>Met <strong>🧠 Reisquiz</strong> kun je jezelf overhoren over de locaties van de op dat moment actieve vakantie of het geselecteerde onderdeel.</p>
+  <ul>
+    <li><strong>locaties.json</strong> wordt alleen gebruikt om de juiste locatie-HTML-bestanden te vinden.</li>
+    <li>De vragen worden uitsluitend gemaakt uit de inhoud van de locatie-HTML-bestanden.</li>
+    <li>De vragen zijn zelfstandig inhoudelijk geformuleerd en verwijzen niet naar een “locatiepagina” of technische bron.</li>
+    <li>Een vraag wordt alleen opgenomen als er drie bruikbare inhoudelijke afleiders gevonden kunnen worden.</li>
+    <li>Technische en navigatieteksten worden uit de bron gefilterd.</li>
+    <li>Na ieder antwoord zie je of het goed is en krijg je de broninformatie te zien.</li>
+    <li>Na afloop zie je je score en kun je met <strong>🔄 Nieuwe quiz</strong> opnieuw vragen laten samenstellen.</li>
+    <li>Als er onvoldoende geschikte inhoud is, maakt de quiz liever minder goede vragen dan slechte of willekeurige vragen.</li>
+  </ul>
+
+  <h3>8. Aantekeningen</h3>
+  <p>Met <strong>📝 Aantekeningen</strong> kun je losse teksten bewaren die niet bij een specifieke locatie of evenement horen. De aantekeningen horen bij de actieve vakantie en blijven lokaal op dit apparaat bewaard.</p>
+  <p>Bij het maken van <strong>💾 Backup content</strong> worden deze aantekeningen meegenomen. Bij <strong>♻️ Backup terugzetten</strong> kunnen ze per vakantie worden teruggezet.</p>
+
+  <h3>9. Vakantiearchief</h3>
+  <p>Het <strong>Vakantiearchief</strong> is een aparte plek voor afgeronde vakanties die je als zelfstandige HTML-reis wilt bewaren.</p>
+  <ul>
+    <li><strong>📦 Vakantie archiveren</strong> maakt van de actieve vakantie een HTML-archief met de bezochte locaties en evenementen, in dezelfde opmaak als <strong>📖 Toon vakantie</strong>.</li>
+    <li>Het gemaakte HTML-bestand wordt naar de map <strong>Downloads</strong> van je apparaat geschreven.</li>
+    <li>De brongegevens in Reisblik worden hierbij <strong>niet verwijderd</strong>.</li>
+    <li>Je kunt het HTML-bestand daarna handmatig in de GitHub-map <code>archief/</code> plaatsen.</li>
+    <li><strong>📚 Vakantiearchief</strong> opent de aparte archiefpagina. Die leest <code>archief/archief.json</code> en toont de vakanties die daarin zijn geregistreerd.</li>
+    <li>Via de archiefpagina kun je een opgeslagen vakantie rechtstreeks openen.</li>
+  </ul>
+  <p><strong>Belangrijk:</strong> het archief is een bewaarplek voor HTML-bestanden. Een nieuwe vakantie wordt niet automatisch naar GitHub geschreven. Na het archiveren moet je het HTML-bestand zelf in <code>archief/</code> zetten en de bijbehorende regel in <code>archief/archief.json</code> toevoegen.</p>
+
+  <h3>10. Zoeken</h3>
+  <p>Zoekt in de Reisblik-informatie. Er wordt gezocht in onder meer locatienamen, typen, adressen, metadata, vaste HTML-inhoud, categoriegegevens en je eigen opgeslagen informatie zoals Extra informatie, notities en eigen locaties.</p>
+  <p>Een zoekresultaat kan worden geopend zodat je direct naar de betreffende locatie kunt gaan.</p>
+
+  <h4>❓ Help</h4>
+  <p>De bestaande reisfuncties blijven beschikbaar nadat je een actieve vakantie hebt geopend. Vanaf het startscherm kies je eerst de vakantiecontext. De Help opent deze handleiding en staat niet onder de onderhoudsfuncties.</p>
+
+  <h3>11. Bezocht</h3>
+  <p>Bij locaties en evenementen kun je aangeven of je er bent geweest. Reisblik bewaart daarbij de bezoekdatum en tijd. Deze registratie wordt gebruikt door Mijn reisdag en blijft na het opnieuw openen van de app beschikbaar zolang je lokale gegevens niet wist.</p>
+
+  <h3>12. Extra informatie</h3>
+  <p>Via <strong>➕ Extra informatie</strong> kun je aanvullende informatie bij een locatie bewaren. Je kunt typen of de microfoon gebruiken voor spraakherkenning. Meerdere gesproken toevoegingen kunnen achter elkaar worden vastgelegd.</p>
+
+  <h3>13. Navigatie</h3>
+  <p>Vanaf een locatie kan Reisblik navigatie naar die locatie openen. De navigatie wordt door de beschikbare navigatie-app/dienst op je apparaat uitgevoerd.</p>
+
+  <h3>14. Kaart, categorieën en afstand</h3>
+  <ul>
+    <li>Je kunt categorieën zoals Locaties, Kunst, Winkels en Horeca aan- en uitzetten.</li>
+    <li>Opgeslagen evenementen vormen de categorie <strong>📅 Evenementen</strong>.</li>
+    <li>Afstanden worden vanaf je actuele of testpositie berekend.</li>
+    <li>De app gebruikt een zone van 500 meter voor nabijheidsinformatie.</li>
+    <li>Voor het verhaal/de locatiebeleving wordt een 250-meterzone gebruikt.</li>
+    <li>Locaties met GPS kunnen op de kaart worden weergegeven; zonder betrouwbare GPS kunnen ze wel in de gegevens voorkomen maar niet als kaartpunt worden geplaatst.</li>
+  </ul>
+
+  <h3>15. Onderhoudsfuncties</h3>
+  <p>De onderhoudsfuncties staan onder <strong>Mijn reisdag</strong>. Met de schakelaar naast de titel kun je deze functies tijdelijk tonen of verbergen. De keuze wordt lokaal op dit apparaat onthouden.</p>
+  <h4>📂 Nieuwe-lok inlezen</h4>
+  <p>Leest nieuwe lokale HTML-locatiecontent in volgens de app-structuur.</p>
+  <h4>📦 Lokale locaties exporteren</h4>
+  <p>Exporteert de eigen/lokale locatiegegevens voor verder gebruik of archivering.</p>
+  <h4>💾 Backup content</h4>
+  <p>Maakt een backup van persoonlijke lokale gegevens, waaronder Bezocht, bezoekdatum/tijd, Extra informatie, persoonlijke notities, eigen locaties en de opgeslagen Agenda.</p>
+  <h4>♻️ Backup terugzetten</h4>
+  <p>Leest een eerder gemaakte contentbackup in en zet de ondersteunde persoonlijke lokale gegevens terug. De vaste app-bestanden en vaste HTML-content worden hiermee niet vervangen.</p>
+  <h4>📖 Toon vakantie</h4>
+  <p>Toont de actieve vakantie als een zelfstandige HTML-reis in dezelfde opmaak als het vakantie-archief. Deze functie maakt geen archiefbestand en verwijdert geen gegevens.</p>
+  <h4>📦 Vakantie archiveren</h4>
+  <p>Maakt van de actieve vakantie een zelfstandige HTML-archiefpagina met alle bezochte locaties en evenementen. Het bestand wordt naar Downloads geschreven. De brongegevens blijven in Reisblik aanwezig.</p>
+  <h4>📚 Vakantiearchief</h4>
+  <p>Opent de aparte map <code>archief/</code> met het overzicht van eerder opgeslagen vakantie-HTML's. De lijst wordt opgebouwd uit <code>archief/archief.json</code>.</p>
+  <h4>📥 Vakantie offline beschikbaar maken</h4>
+  <p>Maakt één gekozen vakantie tijdelijk offline beschikbaar op dit apparaat. De benodigde Reisblik-bestanden worden lokaal in de browsercache opgeslagen, zodat je deze vakantie zonder internet kunt gebruiken.</p>
+  <p>Er kan bewust maar één tijdelijke offline vakantie tegelijk actief zijn. Wanneer je een andere vakantie offline beschikbaar maakt, wordt alleen de vorige tijdelijke offline vakantie opgeruimd. Je overige Reisblik-gegevens in localStorage blijven behouden.</p>
+  <p>De tijdelijke offline vakantie maakt geen onderdeel uit van <strong>Backup content</strong> en wordt dus niet meegenomen in een backup of restore.</p>
+
+  <h3>16. Testfuncties</h3>
+  <p>De testfuncties staan binnen Reisblik Beheer. Met de schakelaar naast <strong>Testfuncties</strong> kun je deze functies tijdelijk tonen of verbergen. De keuze wordt lokaal op dit apparaat onthouden.</p>
+  <h4>🗑️ Alle lokale gegevens wissen</h4>
+  <p>Wist de volledige lokale opslag van Reisblik op dit apparaat. Daardoor verdwijnen ook Bezocht, Extra informatie, notities, eigen locaties en <strong>opgeslagen Agenda-evenementen</strong>. De bestanden op GitHub en de vaste HTML-content worden niet verwijderd.</p>
+  <h4>🧪 Testpositie</h4>
+  <p>Activeert een testpositie zodat GPS-afhankelijke functies kunnen worden getest zonder op die plaats aanwezig te zijn.</p>
+  <h4>🔎 Adres zoeken</h4>
+  <p>Zoekt een opgegeven adres en gebruikt het gevonden punt als testpositie.</p>
+  <h4>🔎 HTML-pad diagnose</h4>
+  <p>Helpt bij het controleren van de paden die Reisblik gebruikt voor HTML-locatiecontent. Deze functie is vooral bedoeld voor het testen en oplossen van problemen.</p>
+
+  <h3>17. Wat blijft lokaal?</h3>
+  <p>Persoonlijke gegevens worden in de browser opgeslagen. Een nieuwe versie van Reisblik op GitHub wist deze gegevens normaal gesproken niet. Gebruik daarom regelmatig <strong>Backup content</strong> als je je gegevens wilt kunnen herstellen.</p>
+
+  <h3>18. Vakanties en contexten</h3>
+  <p>Reisblik werkt met een actieve vakantie/context. Op het startscherm kies je eerst de vakantie die je wilt openen.</p>
+  <p>Een vakantie kan meerdere <strong>plaatsen of etappes</strong> hebben. Deze staan als onderdelen onder de betreffende vakantie in <code>config/vakanties.json</code>. Bijvoorbeeld <strong>El Chaltén</strong> onder <strong>Argentinië &amp; Chili 2027</strong>.</p>
+  <ul>
+    <li>Op het <strong>startscherm</strong> kun je de plaatsen/etappes van de gekozen vakantie aan- of uitvinken.</li>
+    <li>Met <strong>Alles aan</strong> selecteer je alle onderdelen; met <strong>Alles uit</strong> zet je ze allemaal uit.</li>
+    <li>De selectie wordt per vakantie lokaal bewaard. Ga je naar een andere vakantie en later terug, dan blijft de eerdere selectie behouden.</li>
+    <li>Op het tweede scherm, nadat je de vakantie hebt geopend, worden de <strong>geselecteerde plaatsen/etappes alleen getoond</strong>. Daar kun je deze selectie niet wijzigen.</li>
+    <li>Wil je de selectie veranderen, ga dan terug naar het <strong>startscherm</strong>.</li>
+    <li>De geselecteerde onderdelen bepalen welke vakantiegegevens Reisblik in de app gebruikt.</li>
+  </ul>
+  <p>Een gewone vakantie kan vaste HTML-locaties en/of JSON-bestanden per onderdeel hebben. De mapstructuur volgt het onderdeel, bijvoorbeeld <code>argentinie-chili/el-chalten/locaties/locaties.json</code>.</p>
+  <p><strong>Belangrijk:</strong> het toevoegen van een nieuwe plaats of etappe vraagt alleen om het toevoegen van het onderdeel in <code>config/vakanties.json</code> en de bijbehorende map/content op GitHub. De backupfunctie hoeft daarvoor niet per plaats te worden aangepast.</p>
+  <h3>19. Agenda-bestanden</h3>
+  <p>Voor iedere context kan een eigen <code>agenda/agenda.json</code> worden gebruikt. Het JSON-formaat blijft hetzelfde; alleen de map verschilt.</p>
+  <p>Voorbeeld:</p>
+  <ul>
+    <li><code>trekvogelpad/agenda/agenda.json</code></li>
+    <li><code>evenement-2026/agenda/agenda.json</code></li>
+  </ul>
+  <p>Een agenda-bestand bevat nieuwe kandidaten. Na import kun je een evenement bewaren in <strong>Mijn agenda</strong>. Mijn agenda zelf wordt lokaal opgeslagen en staat los van het bronbestand.</p>
+
+  <h3>20. Laatste testfase</h3>
+  <p>De basis van de vakantiearchitectuur is getest. Voor de eindcontrole staan vooral deze onderdelen open:</p>
+  <ul>
+    <li><strong>Zoeken:</strong> controleren dat zoeken daadwerkelijk resultaten toont binnen de actieve context.</li>
+    <li><strong>Eigen locatie:</strong> vooral testen wat er gebeurt na een fout bij het opslaan en daarna opnieuw correct opslaan.</li>
+    <li><strong>Backup/restore:</strong> controleren dat gegevens van verschillende vakanties/contexten gescheiden blijven.</li>
+    <li><strong>Evenementen 2026:</strong> controleren dat de speciale context zonder vaste HTML-locaties correct werkt.</li>
+    <li><strong>Eindtest:</strong> Trekvogelpad, Argentinië &amp; Chili en Evenementen 2026 na elkaar testen op gegevensscheiding.</li>
+  </ul>
+
+  <h3>21. Belangrijk onderscheid</h3>
+  <p><strong>App-bestanden</strong> bepalen hoe Reisblik werkt. <strong>Lokale opslag</strong> bevat jouw persoonlijke gegevens per context. <strong>Tijdelijke offline opslag</strong> bevat alleen de momenteel gekozen offline vakantie en wordt vervangen wanneer je een andere vakantie offline beschikbaar maakt. <strong>agenda.json</strong> is de bron voor nieuwe agenda-evenementen; <strong>Mijn agenda</strong> bevat de lokaal bewaarde evenementen.</p>
+
+  <p style="margin-top:18px;color:#6c777b"><strong>Reisblik v9.9.21</strong> — deze Help-pagina beschrijft de huidige functies, het vakantiearchief, de contextstructuur en laatste testfase.</p>
+</div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/visited.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/extra-info.js?v=9.7.5"></script>
+<script src="js/agenda.js?v=9.7.5"></script>
+<script src="js/vakantie.js?v=9.7.5"></script>
+<script src="js/vakantie-keuze.js?v=9.7.5"></script>
+<script src="js/voorlezen.js?v=9.9.44"></script>
+<script src="js/app.js?v=9.9.44"></script>
+<script src="js/ui.js?v=9.7.5"></script>
+<script src="js/backup.js?v=9.9.44"></script>
+<script src="js/clear-local-storage.js?v=9.7.5"></script>
+
+
+
+
+
+
+
+<script src="js/dagverslag.js?v=9.9.44"></script>
+<script src="js/mijn-reisdag.js?v=9.9.44"></script>
+<script src="js/vakantie-archief.js?v=9.8.19"></script>
+<script src="js/restore.js?v=9.9.44"></script>
+<script src="js/search.js?v=9.7.5"></script>
+<script src="js/help.js?v=9.7.5"></script>
+
+
+
+<script>
+(function initGeselecteerdeOnderdelenWeergave(){
+  function esc(s){
+    return String(s ?? '').replace(/[&<>"']/g,c=>({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+    }[c]));
+  }
+
+  function render(){
+    const host=document.getElementById('vakantieGeselecteerdeOnderdelen');
+    const ctx=window.reisblikVakantie;
+    if(!host || !ctx)return;
+
+    const onderdelen=ctx.getActieveVakantieOnderdelen?.() || [];
+    if(!onderdelen.length){
+      host.hidden=true;
+      host.innerHTML='';
+      return;
+    }
+
+    const selected=new Set((ctx.getGeselecteerdeOnderdeelIds?.() || []).map(String));
+    const names=onderdelen
+      .filter(p=>selected.has(String(p.id)))
+      .map(p=>p.naam || p.id);
+
+    host.hidden=false;
+    host.innerHTML='<strong>Geselecteerde plaatsen / etappes:</strong> '+
+      (names.length
+        ? names.map(n=>'<span class="vakantie-geselecteerd-item">'+esc(n)+'</span>').join('')
+        : '<span class="vakantie-geen-geselecteerde">geen geselecteerd</span>');
+  }
+
+  function init(){
+    const ctx=window.reisblikVakantie;
+    if(!ctx){setTimeout(init,50);return;}
+    ctx.onVakantieGewijzigd(render);
+    render();
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
+
+<script>
+(function initPanelToggles(){
+  const MAINTENANCE_KEY='reisblik_show_maintenance_functions';
+  const TEST_KEY='reisblik_show_test_functions';
+  function setVisibility(bodyId,toggleId,visible){
+    const body=document.getElementById(bodyId);
+    const toggle=document.getElementById(toggleId);
+    if(body)body.classList.toggle('panel-functions-hidden',!visible);
+    if(toggle)toggle.checked=visible;
+  }
+  function init(){
+    const mt=document.getElementById('maintenanceToggle');
+    const tt=document.getElementById('testFunctionsToggle');
+    const mv=localStorage.getItem(MAINTENANCE_KEY)!=='0';
+    const tv=localStorage.getItem(TEST_KEY)!=='0';
+    setVisibility('maintenanceFunctionsBody','maintenanceToggle',mv);
+    setVisibility('testFunctionsBody','testFunctionsToggle',tv);
+    mt?.addEventListener('change',function(){
+      localStorage.setItem(MAINTENANCE_KEY,this.checked?'1':'0');
+      setVisibility('maintenanceFunctionsBody','maintenanceToggle',this.checked);
+    });
+    tt?.addEventListener('change',function(){
+      localStorage.setItem(TEST_KEY,this.checked?'1':'0');
+      setVisibility('testFunctionsBody','testFunctionsToggle',this.checked);
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+
+<div id="htmlPathDebugOverlay" style="display:none;position:fixed;inset:0;background:#0008;z-index:5000;padding:12px;overflow:auto" role="dialog" aria-modal="true" aria-labelledby="htmlPathDebugTitle">
+  <div style="background:#fff;border-radius:16px;padding:16px;max-width:1100px;margin:10px auto;box-shadow:0 8px 30px #0004">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h2 id="htmlPathDebugTitle" style="margin:0">🔎 HTML-pad diagnose</h2>
+      <button type="button" onclick="closeHtmlPathDebug()" style="background:#e8e5df;color:#26353a">Sluiten</button>
+    </div>
+    <p style="margin:10px 0">
+      Hieronder zie je <strong>exact welk HTML-pad uit de brongegevens de app gebruikt</strong>,
+      naar welke volledige URL dat pad wordt omgerekend en welke HTTP-respons het bestand geeft.
+    </p>
+    <div id="htmlPathDebugSummary" class="status">Diagnose wordt gestart…</div>
+    <div id="htmlPathDebugList" style="margin-top:12px"></div>
+  </div>
+</div>
+<script>
+function closeHtmlPathDebug(){
+  const el=document.getElementById('htmlPathDebugOverlay');
+  if(el)el.style.display='none';
+}
+
+async function openHtmlPathDebug(){
+  const overlay=document.getElementById('htmlPathDebugOverlay');
+  const summary=document.getElementById('htmlPathDebugSummary');
+  const list=document.getElementById('htmlPathDebugList');
+  if(!overlay||!summary||!list)return;
+  overlay.style.display='block';
+  summary.textContent='Diagnose wordt gestart…';
+  list.innerHTML='';
+
+  let rows=[];
+  try{
+    // "locations" is the same global app data used by the existing renderer.
+    const data=(typeof locations!=='undefined' && Array.isArray(locations)) ? locations : [];
+    const items=data.filter(x=>!x.userCreated && (x.content||x.html||x.file));
+    const pageUrl=location.href;
+    const pageDir=new URL('./',pageUrl).href;
+
+    if(!items.length){
+      summary.innerHTML='<span style="color:#a33;font-weight:700">Geen vaste HTML-locaties beschikbaar in de app.</span><br>De diagnose kan daardoor geen HTML-paden testen.';
+      return;
+    }
+
+    summary.innerHTML=
+      '<strong>App-pagina:</strong> <code>'+htmlDebugEsc(pageUrl)+'</code><br>'+
+      '<strong>Basisdirectory van de app:</strong> <code>'+htmlDebugEsc(pageDir)+'</code><br>'+
+      '<strong>Aantal vaste HTML-locaties:</strong> '+items.length+'<br>'+
+      '<span id="htmlPathDebugProgress">Bestanden worden getest…</span>';
+
+    const results=await Promise.all(items.map(async (x)=>{
+      const raw=String(x.content||x.html||x.file||'');
+      let resolved='';
+      try{
+        if(typeof resolveContentUrl==='function') resolved=resolveContentUrl(x)||'';
+        else resolved=new URL(raw,pageUrl).href;
+      }catch(e){ resolved='ONGELDIGE URL: '+e.message; }
+
+      let status='—', ok=false, error='';
+      if(resolved && !resolved.startsWith('ONGELDIGE URL:')){
+        try{
+          const response=await fetch(resolved+(resolved.includes('?')?'&':'?')+'htmlDebug='+Date.now(),{cache:'no-store'});
+          status=String(response.status)+' '+(response.statusText||'');
+          ok=response.ok;
+          if(!ok)error='HTTP '+response.status;
+        }catch(e){
+          error=e&&e.message?e.message:String(e);
+        }
+      }else{
+        error=resolved||'Geen HTML-pad gevonden';
+      }
+
+      return {x,raw,resolved,status,ok,error};
+    }));
+
+    const good=results.filter(r=>r.ok).length;
+    const bad=results.length-good;
+    summary.innerHTML=
+      '<strong>App-pagina:</strong> <code>'+htmlDebugEsc(pageUrl)+'</code><br>'+
+      '<strong>Basisdirectory van de app:</strong> <code>'+htmlDebugEsc(pageDir)+'</code><br>'+
+      '<strong>Getest:</strong> '+results.length+' HTML-bestanden · '+
+      '<strong style="color:'+(bad?'#a33':'#176b3a')+'">'+good+' gevonden</strong> · '+
+      '<strong style="color:'+(bad?'#a33':'#176b3a')+'">'+bad+' niet gevonden</strong>';
+
+    list.innerHTML=results.map((r,i)=>{
+      const border=r.ok?'#2d7d46':'#b33';
+      const bg=r.ok?'#f5fbf6':'#fff5f5';
+      return '<div style="border:2px solid '+border+';background:'+bg+';border-radius:12px;padding:11px;margin-bottom:9px">'+
+        '<div style="font-weight:700;font-size:16px">'+(r.ok?'✓':'✗')+' '+htmlDebugEsc(r.x.name||r.x.id||('Locatie '+(i+1)))+'</div>'+
+        '<div style="margin-top:7px"><strong>Pad uit locaties.json:</strong><br><code style="word-break:break-all">'+htmlDebugEsc(r.raw)+'</code></div>'+
+        '<div style="margin-top:6px"><strong>Volledige URL waar de app naar zoekt:</strong><br><code style="word-break:break-all">'+htmlDebugEsc(r.resolved)+'</code></div>'+
+        '<div style="margin-top:6px"><strong>HTTP-resultaat:</strong> '+htmlDebugEsc(r.status||'—')+
+        (r.error?' · <span style="color:#a33;font-weight:700">'+htmlDebugEsc(r.error)+'</span>':'')+
+        '</div>'+
+        '</div>';
+    }).join('');
+  }catch(e){
+    summary.innerHTML='<span style="color:#a33;font-weight:700">Diagnosefout:</span> '+htmlDebugEsc(e&&e.message?e.message:String(e));
+  }
+}
+
+function htmlDebugEsc(s){
+  return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+</script>
+
+<script>
+(function initReisblikHub(){
+  const START_KEY='reisblik_hub_seen_v1';
+  const byId=id=>document.getElementById(id);
+  function toggle(id){
+    const body=byId(id+'Body'), btn=byId(id+'Toggle'); if(!body||!btn)return;
+    const open=body.hidden; body.hidden=!open; btn.setAttribute('aria-expanded',String(open));
+  }
+  function showWorkspace(){
+    document.body.classList.remove('reisblik-startscherm');
+    localStorage.setItem(START_KEY,'1');
+  }
+  function showHub(){
+    document.body.classList.add('reisblik-startscherm');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function renderParts(){
+    const host=byId('hubParts'); const select=byId('hubVacationSelect');
+    const id=select?.value; const vs=window.reisblikVakantie?.getVakanties?.()||[];
+    const v=vs.find(x=>x.id===id); const parts=Array.isArray(v?.onderdelen)?v.onderdelen:[];
+    if(!parts.length){host.hidden=true;host.innerHTML='';return;}
+    host.hidden=false;
+    const selected=window.reisblikVakantie?.getGeselecteerdeOnderdeelIds?.()||parts.map(x=>String(x.id));
+    host.innerHTML='<div class="hub-parts-title">Welke plaatsen / etappes wil je zien?</div>'+parts.map(p=>{
+      const checked=selected.includes(String(p.id));
+      return '<label class="hub-part"><input type="checkbox" data-hub-part="'+esc(String(p.id))+'" '+(checked?'checked':'')+'> <span>'+esc(p.naam||p.id)+'</span></label>';
+    }).join('')+'<div class="hub-part-actions"><button type="button" id="hubAllParts">Alles aan</button><button type="button" id="hubNoParts">Alles uit</button></div>';
+    host.querySelectorAll('[data-hub-part]').forEach(cb=>cb.addEventListener('change',saveParts));
+    byId('hubAllParts')?.addEventListener('click',()=>{host.querySelectorAll('[data-hub-part]').forEach(x=>x.checked=true);saveParts();});
+    byId('hubNoParts')?.addEventListener('click',()=>{host.querySelectorAll('[data-hub-part]').forEach(x=>x.checked=false);saveParts();});
+  }
+  function saveParts(){
+    const ids=[...document.querySelectorAll('[data-hub-part]:checked')].map(x=>x.dataset.hubPart);
+    window.reisblikVakantie?.setGeselecteerdeOnderdeelIds?.(ids);
+  }
+  function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+  async function loadArchives(){
+    const select=byId('hubArchiveSelect'); if(!select)return;
+    try{const r=await fetch('archief/archief.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();const a=Array.isArray(d.archieven)?d.archieven:[];
+      select.innerHTML=a.length?a.map(x=>'<option value="'+esc(x.bestand||'')+'">'+esc(x.naam||x.id||'Archief')+'</option>').join(''):'<option value="">— nog geen archieven —</option>';
+    }catch(e){select.innerHTML='<option value="">— archief kon niet worden geladen —</option>';}
+  }
+  function fillVacations(){
+    const select=byId('hubVacationSelect'); if(!select)return;
+    const vs=window.reisblikVakantie?.getVakanties?.()||[];
+    select.innerHTML=vs.map(v=>'<option value="'+esc(v.id)+'">'+esc(v.naam)+'</option>').join('');
+    const active=window.reisblikVakantie?.getActieveVakantieId?.(); if(active)select.value=active;
+    renderParts();
+  }
+  function openVacation(){
+    const select=byId('hubVacationSelect'); const id=select?.value; if(!id)return;
+    const ids=[...document.querySelectorAll('[data-hub-part]:checked')].map(x=>x.dataset.hubPart);
+    const ok=window.reisblikVakantie?.kiesVakantieMetOnderdelen ? window.reisblikVakantie.kiesVakantieMetOnderdelen(id,ids) : window.reisblikVakantie?.kiesVakantie?.(id);
+    if(ok){showWorkspace();}
+  }
+  function openArchive(){
+    const f=byId('hubArchiveSelect')?.value; if(f)window.location.href='archief/'+f;
+  }
+  function bind(){
+    byId('hubManageToggle')?.addEventListener('click',()=>toggle('hubManage'));
+    byId('hubVacationSelect')?.addEventListener('change',renderParts);
+    byId('hubOpenVacationBtn')?.addEventListener('click',openVacation);
+    byId('hubOpenArchiveBtn')?.addEventListener('click',openArchive);
+    byId('hubShowMaintenanceBtn')?.addEventListener('click',()=>{showWorkspace();document.getElementById('maintenanceFunctions')?.scrollIntoView({behavior:'smooth'});});
+    byId('hubBackBtn')?.addEventListener('click',()=>{window.location.href='index.html';});
+    byId('hubMijnReisdagBtn')?.addEventListener('click',()=>{window.location.href='mijn-reisdag.html';});
+    window.reisblikVakantie?.onVakantieGewijzigd?.(fillVacations);
+    fillVacations(); loadArchives();
+    document.body.classList.add('reisblik-startscherm');
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();
+})();
+</script>
+
+<script>
+(function reisblikPageMode(){
+  function apply(){
+    const hash=window.location.hash;
+    if(hash==='#open'){
+      document.body.classList.remove('reisblik-startscherm');
+    }else if(hash==='#beheer'){
+      document.body.classList.add('reisblik-startscherm');
+      const body=document.getElementById('hubManageBody');
+      const btn=document.getElementById('hubManageToggle');
+      if(body && btn){ body.hidden=false; btn.setAttribute('aria-expanded','true'); }
+      window.scrollTo({top:0});
+    }
+  }
+  window.addEventListener('hashchange',apply);
+  window.addEventListener('load',apply);
+})();
+</script>
+
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js', {updateViaCache:'none'})
+      .then(reg => reg.update())
+      .catch(err => console.warn('Reisblik offline basis kon niet worden geactiveerd:', err));
+  });
+}
+
+function updateOfflineStatus() {
+  const el = document.getElementById('offlineStatus');
+  if (!el) return;
+  el.textContent = navigator.onLine ? '🟢 Online' : '🟠 Offline – GPS kan blijven werken';
+  el.style.color = navigator.onLine ? '#176b3a' : '#9a5b00';
+}
+window.addEventListener('online', updateOfflineStatus);
+window.addEventListener('offline', updateOfflineStatus);
+updateOfflineStatus();
+</script>
+<script src="js/quiz.js?v=9.9.44"></script>
+<script src="js/offline-prepare.js?v=9.8.6"></script>
+<script src="js/aantekeningen.js?v=9.8.6"></script>
+</body>
+</html>
