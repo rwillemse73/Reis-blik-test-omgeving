@@ -1,0 +1,481 @@
+{
+  "formatVersion": "2.0",
+  "sourceFile": "horeca.zip",
+  "createdAt": "2026-10-11",
+  "description": "Praag horeca: geconsolideerde JSON-dataset met technische locatiegegevens en volledige tekstalinea's uit de HTML-bestanden. HTML-bronbestanden blijven behouden voor vergelijking en fallback.",
+  "dataModel": {
+    "runtimeSource": "Per record geeft sourceInfo.runtimeSource aan waar de app de data uit laadt. Voor deze test is dit json.",
+    "narrativeOrigin": "sourceInfo.narrativeOrigin geeft aan waar de verhaaltekst oorspronkelijk vandaan kwam.",
+    "contentParagraphs": "Zichtbare tekstalinea's uit het HTML-bestand, in oorspronkelijke volgorde.",
+    "sourceInfo": "Herkomstinformatie per record om JSON-data te onderscheiden van HTML-fallback."
+  },
+  "locations": [
+    {
+      "id": "kuchyn",
+      "name": "KUCHYŇ",
+      "area": "Praagse Burcht",
+      "type": "Restaurant / Tsjechische keuken",
+      "address": "Hradčanské náměstí 186/1, 118 00 Praha 1",
+      "lat": 50.0889,
+      "lon": 14.3969,
+      "gpsStatus": "benadering op basis van bestaande masterdata; voor technische productie opnieuw adres/GPS koppelen.",
+      "google": "4,4 / 481 beoordelingen (controle 6-9-2026)",
+      "openingHours": "dagelijks 11:30–23:00",
+      "website": "https://kuchyn.ambi.cz/",
+      "content": "kuchyn.html",
+      "contentParagraphs": [
+        "Kuchyň ligt direct bij de Praagse Burcht en is daardoor veel meer dan een restaurant dat toevallig naast een bezienswaardigheid staat. Je zit hier boven op de Burchtheuvel, midden in een van de belangrijkste historische gebieden van Praag, terwijl de stad beneden je uitstrekt.",
+        "De naam betekent simpelweg ‘keuken’. Het restaurant richt zich op Tsjechische gerechten en gebruikt daarbij ook recepten die zijn geïnspireerd op de keuken van de vroegere adel. Het uitzicht over Praag is echter minstens zo belangrijk als wat er op het bord ligt.",
+        "Voor jullie weekend is Kuchyň vooral een sterke lunchplek tijdens de dag op de Praagse Burcht. Je hoeft de historische omgeving niet te verlaten om even te gaan eten. Daardoor voelt de lunch als onderdeel van het bezoek aan de Burcht.",
+        "BIJZONDER Geschiedenis + uitzicht + Tsjechische keuken.",
+        "WANNEER IN DE ROUTE Lunch tijdens of direct na het bezoek aan de Praagse Burcht.",
+        "PRAKTISCH Dagelijks geopend volgens de huidige informatie. De actuele kaart en eventuele reserveringsmogelijkheden moeten bij het definitieve bezoek opnieuw worden gecontroleerd."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "kuchyn.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "lobkowicz-palace-cafe",
+      "name": "LOBKOWICZ PALACE CAFÉ",
+      "area": "Praagse Burcht",
+      "type": "Café / restaurant",
+      "address": "Jiřská 3, Prague Castle, 119 00 Praha 1",
+      "lat": 50.091608,
+      "lon": 14.404853,
+      "gpsStatus": "benadering",
+      "google": "4,1 / 967 beoordelingen",
+      "openingHours": "dagelijks 10:00–18:00",
+      "website": "https://www.lobkowicz.cz/en/lobkowicz-palace/lobkowicz-palace-cafe",
+      "content": "lobkowicz-palace-cafe.html",
+      "contentParagraphs": [
+        "Het Lobkowicz Palace Café is een plek waar het eten rechtstreeks onderdeel wordt van een museumbezoek. Het café bevindt zich op de begane grond van het Lobkowiczpaleis, binnen het complex van de Praagse Burcht.",
+        "Na een bezoek aan de kunst- en historische collecties van de familie Lobkowicz kun je hier blijven zitten voor lunch, koffie of iets zoets. Vooral het terras is aantrekkelijk: vanaf hier kijk je uit over Praag. Er is daarnaast een historische binnenplaats die in het seizoen wordt gebruikt.",
+        "Dat maakt deze plek anders dan een gewoon café. Je hoeft niet eerst terug de stad in; de horeca vormt een natuurlijk vervolg op het paleisbezoek.",
+        "BIJZONDER Paleis + kunst + uitzicht.",
+        "WANNEER IN DE ROUTE Direct tijdens een bezoek aan het Lobkowiczpaleis.",
+        "PRAKTISCH Restaurant en café zijn momenteel dagelijks geopend van 10:00 tot 18:00. Het paleis zelf heeft andere openingstijden en entreevoorwaarden."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "lobkowicz-palace-cafe.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "cafe-savoy",
+      "name": "CAFÉ SAVOY",
+      "area": "Malá Strana",
+      "type": "Historisch café / restaurant",
+      "address": "Vítězná 5, 150 00 Praha 5",
+      "lat": 50.0815,
+      "lon": 14.4079,
+      "gpsStatus": "benadering",
+      "google": "4,2 / 3.314 beoordelingen",
+      "openingHours": "maandag–vrijdag 08:00–22:00; zaterdag–zondag 09:00–22:00",
+      "website": "https://www.cafesavoy.ambi.cz/en/",
+      "content": "cafe-savoy.html",
+      "contentParagraphs": [
+        "Café Savoy is een van de plekken waar je het gevoel krijgt dat je even terugstapt in het Praag van de late negentiende en vroege twintigste eeuw. Het hoge historische interieur, de houten inrichting en de grote cafézaal maken de ruimte zelf tot een belangrijk onderdeel van de ervaring.",
+        "Overdag functioneert Savoy als een levendig café met ontbijt, koffie, gebak en lunch. In de avond verandert de sfeer en krijgt het restaurant een rustiger karakter. De huidige keuken combineert een cafétraditie met een moderne restaurantkeuken.",
+        "Voor jullie weekend is Savoy vooral interessant als start van een dag of als uitgebreide stop tijdens het wandelen door Malá Strana en richting Kampa.",
+        "BIJZONDER Historisch interieur + cafétraditie + eten.",
+        "WANNEER IN DE ROUTE Ontbijt, lunch of koffiestop tijdens Malá Strana/Kampa.",
+        "PRAKTISCH Weekendopening vanaf 09:00. De officiële website vermeldt dagelijks 08:00–22:00 op werkdagen en 09:00–22:00 in het weekend."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "cafe-savoy.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "iveta-fabesova-cafe-werich-villa",
+      "name": "IVETA FABEŠOVÁ CAFÉ – WERICH VILLA",
+      "area": "Kampa & Moldau-oever",
+      "type": "Café / patisserie",
+      "address": "U Sovových mlýnů 501/7, 118 00 Praha 1",
+      "lat": 50.0837,
+      "lon": 14.4084,
+      "gpsStatus": "benadering",
+      "google": "nog niet betrouwbaar vastgesteld in deze ronde",
+      "openingHours": "officiële bron vermeldt verschillende actuele openingstijden; contactpagina: maandag–vrijdag 08:00–20:00, zaterdag–zondag 09:00–20:00",
+      "website": "https://ivetafabesova.cz/branches/werichova",
+      "content": "iveta-fabesova-cafe-werich-villa.html",
+      "contentParagraphs": [
+        "De Iveta Fabešová-locatie in de Werich Villa is een mooie combinatie van horeca en cultuur. Je komt hier niet alleen voor koffie of gebak, maar bevindt je tegelijkertijd op Kampa, in een historisch gebouw dat verbonden is met de Tsjechische acteur en schrijver Jan Werich.",
+        "De patisserie van Iveta Fabešová geeft de plek een moderne, verfijnde kant. Daardoor ontstaat een interessante combinatie: een historisch huis, de groene omgeving van Kampa, de Moldau vlakbij en eigentijdse patisserie.",
+        "Voor jullie weekend is dit vooral een leuke stop tijdens een wandeling over Kampa. Het is precies het soort plek waar je niet alleen een horecazaak bezoekt, maar een stukje van de sfeer van de wijk meepakt.",
+        "BIJZONDER Werich Villa + Kampa + patisserie.",
+        "WANNEER IN DE ROUTE Koffie/gebak tijdens Kampa en de Moldau-oever.",
+        "PRAKTISCH De officiële website toont momenteel verschillende openingstijden op verschillende pagina's. Voor de definitieve HTML moet één actuele bedrijfsopgave worden vastgesteld; dit wordt niet als onbevestigd feit in de eindversie opgenomen."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "iveta-fabesova-cafe-werich-villa.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "grand-cafe-orient",
+      "name": "GRAND CAFÉ ORIENT",
+      "area": "Oude Stad / Staré Město",
+      "type": "Café / patisserie",
+      "address": "Ovocný trh 19, 110 00 Praha 1",
+      "lat": 50.0872,
+      "lon": 14.4264,
+      "gpsStatus": "benadering",
+      "google": "3,5 / 1.336 beoordelingen",
+      "openingHours": "maandag–vrijdag 09:00–21:00; zaterdag–zondag 10:00–21:00",
+      "website": "https://grandcafeorient.cz/en/",
+      "content": "grand-cafe-orient.html",
+      "contentParagraphs": [
+        "Grand Café Orient is geen café dat toevallig in een mooi gebouw zit. Het bevindt zich op de eerste verdieping van het Huis van de Zwarte Madonna, een van de bekendste voorbeelden van het Tsjechisch kubisme.",
+        "Architect Josef Gočár ontwierp het gebouw in 1912. Ook het oorspronkelijke café-interieur werd in de kubistische stijl vormgegeven. Het café sloot in de jaren twintig toen het kubisme uit de mode raakte, maar werd veel later opnieuw geopend.",
+        "Daardoor is een bezoek aan Grand Café Orient eigenlijk een kleine architectuurervaring. Je kunt er koffie drinken of iets eten, maar tegelijkertijd kijk je naar een heel bijzondere vorm van Tsjechische moderne architectuur.",
+        "Voor jullie weekend is dit een perfecte stop tijdens het wandelen door de Oude Stad.",
+        "BIJZONDER Kubistische architectuur + café + geschiedenis.",
+        "WANNEER IN DE ROUTE Koffie of gebak tijdens de wandeling rond Oude Stadsplein, Celetná en de Poedertoren.",
+        "PRAKTISCH De officiële website vermeldt maandag–vrijdag 09:00–21:00 en zaterdag–zondag 10:00–21:00."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "grand-cafe-orient.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "smetanaq-cafe-bistro",
+      "name": "SMETANAQ CAFÉ & BISTRO",
+      "area": "Klementinum / culturele Staré Město – Moldau-oever",
+      "type": "Café / bistro / creatieve ontmoetingsplek",
+      "address": "Smetanovo nábřeží 334/4, 110 00 Praha 1",
+      "lat": 50.082046,
+      "lon": 14.413262,
+      "gpsStatus": "exact volgens officiële website",
+      "google": "4,3 / 200 beoordelingen",
+      "openingHours": "maandag–donderdag 09:00–21:00; vrijdag–zaterdag 09:00–22:00; zondag 09:00–20:00",
+      "website": "https://smetanaq.cz/en/",
+      "content": "smetanaq-cafe-bistro.html",
+      "contentParagraphs": [
+        "SmetanaQ is een heel andere Praagse ervaring dan de historische cafés. Het gebouw aan de Moldau is een ontmoetingsplek voor ontwerpers, kunstenaars, studenten en andere creatieve bezoekers. Het café vormt het hart van het gebouw.",
+        "Vanuit het café kijk je over de Moldau richting de Praagse Burcht. Op de kaart staan onder meer koffie, thee, brunch, gebak en lichte gerechten. De plek combineert daardoor een moderne stedelijke sfeer met een van de klassieke uitzichten van Praag.",
+        "Voor jullie weekend is dit juist interessant als tegenhanger van de monumentale binnenstad. Na kerken, paleizen en historische pleinen kom je hier in het hedendaagse creatieve Praag terecht.",
+        "BIJZONDER Design + kunst + jonge sfeer + uitzicht over de Moldau.",
+        "WANNEER IN DE ROUTE Brunch, koffie of lichte lunch langs de Moldau.",
+        "PRAKTISCH Officiële openingstijden: ma–do 09:00–21:00, vr–za 09:00–22:00, zo 09:00–20:00."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "smetanaq-cafe-bistro.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "vytopna-railway-restaurant",
+      "name": "VÝTOPNA RAILWAY RESTAURANT",
+      "area": "Wenceslasplein",
+      "type": "Restaurant / belevenis",
+      "address": "Václavské náměstí 802/56, 110 00 Praha 1",
+      "lat": 50.0809,
+      "lon": 14.4261,
+      "gpsStatus": "benadering",
+      "google": "3,7 / 4.162 beoordelingen",
+      "openingHours": "dagelijks 11:00–24:00",
+      "website": "https://www.vytopna.cz/en",
+      "content": "vytopna-railway-restaurant.html",
+      "contentParagraphs": [
+        "Bij Výtopna weet je meteen dat dit geen gewoon restaurant is. Drankjes worden door modeltreinen naar de tafels gebracht. Het spoor loopt dwars door het restaurant en vormt daarmee onderdeel van het interieur en de ervaring.",
+        "Volgens de exploitant rijden er veertien digitaal bestuurde locomotieven over ongeveer 900 meter spoor, met vijf beweegbare bruggen. Het concept is bewust speels: het restaurant is bedoeld voor treinliefhebbers, maar juist ook voor bezoekers die gewoon iets bijzonders willen meemaken.",
+        "Voor jullie weekend is dit de plek waar het programma even niet serieus hoeft te zijn. Na een dag vol geschiedenis en architectuur is het gewoon leuk om samen te kijken hoe je bestelling per trein arriveert.",
+        "BIJZONDER Modeltreinen + fun + samen beleven.",
+        "WANNEER IN DE ROUTE Lunch, vroeg diner of avondstop rond het Wenceslasplein.",
+        "PRAKTISCH Dagelijks 11:00–24:00 volgens de officiële website."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "vytopna-railway-restaurant.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "u-kroka",
+      "name": "U KROKA",
+      "area": "Vyšehrad",
+      "type": "Familierestaurant / Tsjechische keuken",
+      "address": "Vratislavova 28, 128 00 Praha 2",
+      "lat": 50.064,
+      "lon": 14.4177,
+      "gpsStatus": "benadering",
+      "google": "4,6 / 6.866 beoordelingen",
+      "openingHours": "dagelijks 11:30–23:00; keuken gesloten 16:00–17:00",
+      "website": "https://www.ukroka.cz/en/",
+      "content": "u-kroka.html",
+      "contentParagraphs": [
+        "U Kroka is interessant omdat het een heel ander soort Praag laat zien. Na de drukke historische kern kom je bij Vyšehrad terecht in een gebied met een veel rustiger en lokaler karakter. Dit kleine familierestaurant richt zich vooral op de Tsjechische keuken.",
+        "Op de kaart staan bekende Tsjechische gerechten zoals svíčková, goulash, eend en varkensgerechten. Er is ook een vegetarisch aanbod. Daarmee is dit een goede plek om bewust iets van de traditionele keuken te proberen.",
+        "Voor jullie weekend is U Kroka vooral logisch na een wandeling over Vyšehrad. Je sluit de historische wandeling af met een echte Tsjechische maaltijd in plaats van met een toeristische restaurantstraat.",
+        "BIJZONDER Lokaal + Tsjechische keuken + Vyšehrad.",
+        "WANNEER IN DE ROUTE Lunch of diner rond Vyšehrad.",
+        "PRAKTISCH Dagelijks 11:30–23:00. De keuken is dagelijks gesloten tussen 16:00 en 17:00."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "u-kroka.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "restaurace-mlynec",
+      "name": "RESTAURACE MLÝNEC",
+      "area": "Karelsbrug / Moldau-oever",
+      "type": "Restaurant / moderne Tsjechische keuken",
+      "address": "Novotného lávka 9, 110 00 Praha 1",
+      "lat": 50.0857,
+      "lon": 14.413,
+      "gpsStatus": "benadering",
+      "google": "4,7 / 5.322 beoordelingen",
+      "openingHours": "maandag–vrijdag 11:30–13:30 en 17:00–22:00; zaterdag–zondag 11:30–15:00 en 17:30–22:00",
+      "website": "https://www.mlynec.cz/",
+      "content": "restaurace-mlynec.html",
+      "contentParagraphs": [
+        "Mlýnec is de plek uit deze lijst waar de locatie bijna een deel van het diner wordt. Het restaurant ligt direct aan de Moldau, met de Karelsbrug als decor. Vanuit de ruimte kijk je uit over een van de meest herkenbare plekken van Praag.",
+        "De keuken gebruikt Tsjechische ingrediënten en traditionele smaken, maar presenteert ze in een moderne vorm. Daarmee past het restaurant goed bij een speciaal moment: je krijgt niet alleen een maaltijd, maar ook een uitzicht dat bij de stad hoort.",
+        "Voor jullie weekend zou ik Mlýnec bewaren voor een moment waarop jullie rustig willen zitten en de stad vanaf het water willen beleven.",
+        "BIJZONDER Karelsbrug + Moldau + bijzonder diner.",
+        "WANNEER IN DE ROUTE Lunch of diner rond de Karelsbrug.",
+        "PRAKTISCH De openingstijden zijn gesplitst in lunch en diner. Ma–vr 11:30–13:30 en 17:00–22:00; za–zo 11:30–15:00 en 17:30–22:00."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "restaurace-mlynec.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "hospudka-na-hradbach",
+      "name": "HOSPŮDKA NA HRADBÁCH",
+      "area": "Vyšehrad",
+      "type": "Pub / grill / eenvoudige horeca",
+      "address": "V Pevnosti 16/2, 120 00 Praha 2",
+      "lat": 50.063619,
+      "lon": 14.421947,
+      "gpsStatus": "exact/kaartpositie",
+      "google": "4,3 / 67 beoordelingen",
+      "openingHours": "",
+      "website": "https://na-hradbach.cz/",
+      "content": "hospudka-na-hradbach.html",
+      "contentParagraphs": [
+        "Hospůdka Na Hradbách ligt letterlijk op de vestingwerken van Vyšehrad, bij het Bastion van Sint Rochus. Dat is de reden waarom deze eenvoudige horecaplek in de lijst hoort.",
+        "Het is geen restaurant voor een uitgebreid gastronomisch diner. Het is juist een plek waar je tijdens een wandeling over de vesting kunt neerstrijken voor iets te eten of drinken, met uitzicht over Praag. Er zijn tafels buiten en de zaak organiseert ook culturele activiteiten zoals concerten, filmvertoningen en andere evenementen.",
+        "Voor jullie weekend is dit vooral de informele optie: jas uit, iets drinken, uitzicht erbij en verder wandelen.",
+        "BIJZONDER Vestingwerken + uitzicht + informele sfeer.",
+        "WANNEER IN DE ROUTE Pauze tijdens de wandeling over Vyšehrad.",
+        "PRAKTISCH Bar ma–vr 12:00–24:00, za–zo 10:00–24:00. Grill ma–vr 13:00–21:30, za–zo 11:30–21:30."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "hospudka-na-hradbach.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      },
+      "personalData": {
+        "visitedAt": "2026-10-11T11:21:32.488Z",
+        "extraInfo": [
+          {
+            "date": "2026-10-11",
+            "text": "wordt deze tekst nu vastgelegd"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cafe-slavia",
+      "name": "CAFÉ SLAVIA",
+      "area": "Národní & zuidelijk Nové Město / Moldau-oever",
+      "type": "Historisch café / restaurant",
+      "address": "Národní 1 / Smetanovo nábřeží 1012/2, 110 00 Praha 1",
+      "lat": 50.081645,
+      "lon": 14.413014,
+      "gpsStatus": "kaartbron",
+      "google": "3,9 / 2.260 beoordelingen",
+      "openingHours": "maandag–zaterdag 09:00–23:00; zondag 09:00–22:00",
+      "website": "https://www.cafeslavia.cz/en/",
+      "content": "cafe-slavia.html",
+      "contentParagraphs": [
+        "Café Slavia is een van de cafés waar de culturele geschiedenis van Praag bijna tastbaar wordt. Het café ligt tegenover het Nationaal Theater en kijkt uit over de Moldau richting de Karelsbrug en de Praagse Burcht.",
+        "Het café opende in 1884. Door de ligging tegenover het theater werd het een ontmoetingsplaats voor acteurs, schrijvers, kunstenaars en intellectuelen. De officiële geschiedenis van Slavia noemt onder anderen Karel en Josef Čapek, Arnošt Lustig, Václav Havel en andere belangrijke figuren uit de Tsjechische cultuur. Ook het politieke en culturele leven rond de Fluwelen Revolutie raakte met de plek verbonden.",
+        "Daardoor is Slavia voor Reisblik interessanter dan alleen een café met mooi uitzicht. Je zit op een plek waar generaties van het culturele Praag samenkwamen.",
+        "BIJZONDER Literatuur + kunst + politiek + uitzicht.",
+        "WANNEER IN DE ROUTE Koffie, lunch of diner tijdens Národní en de Moldau-oever.",
+        "PRAKTISCH Dagelijks geopend. Ma–za 09:00–23:00; zondag 09:00–22:00. De officiële website vermeldt ook dagelijks live pianomuziek vanaf de namiddag/avond."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "cafe-slavia.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "cafe-louvre",
+      "name": "CAFÉ LOUVRE",
+      "area": "Národní & zuidelijk Nové Město",
+      "type": "Historisch grand café / restaurant",
+      "address": "Národní 22, 110 00 Praha 1",
+      "lat": 50.082066,
+      "lon": 14.418731,
+      "gpsStatus": "kaartbron",
+      "google": "4,3 / 5.242 beoordelingen",
+      "openingHours": "maandag–vrijdag 08:00–23:30; zaterdag–zondag 09:00–23:30",
+      "website": "https://www.cafelouvre.cz/en/",
+      "content": "cafe-louvre.html",
+      "contentParagraphs": [
+        "Café Louvre werd in 1902 geopend en behoort tot de klassieke grand cafés van Praag. Het is een plek waar de cafétraditie zelf onderdeel van het bezoek is: grote zalen, lange tafels, koffie, ontbijt, lunch, diner en gebak.",
+        "De officiële website presenteert Louvre als een café met een rijke geschiedenis en een klassieke menukaart die is geïnspireerd op de bekende Weense cafés. Er zijn bovendien historische biljartzalen.",
+        "Voor jullie weekend is Louvre vooral interessant wanneer je even een klassieke Praagse caféervaring wilt zonder dat je daarvoor een speciaal programma hoeft te plannen.",
+        "BIJZONDER Grand café + geschiedenis + klassieke sfeer.",
+        "WANNEER IN DE ROUTE Ontbijt, lunch, koffie of diner rond Národní.",
+        "PRAKTISCH Ma–vr 08:00–23:30; za–zo 09:00–23:30. De officiële website vermeldt ontbijt, lunch, diner, desserts en biljart."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "cafe-louvre.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "villa-richter",
+      "name": "VILLA RICHTER",
+      "area": "Praagse Burcht / Sint-Wenceslauswijngaard",
+      "type": "Restaurant / wijnlocatie",
+      "address": "Staré zámecké schody 6/251, 118 00 Praha 1",
+      "lat": 50.09254,
+      "lon": 14.40823,
+      "gpsStatus": "kaartbron",
+      "google": "4,4 / 816 beoordelingen",
+      "openingHours": "",
+      "website": "https://www.villarichter.cz/en/",
+      "content": "villa-richter.html",
+      "contentParagraphs": [
+        "Villa Richter is een bijzondere toevoeging aan de Burchtdag omdat hier iets samenkomt wat je niet snel met Praag associeert: een historische wijngaard midden in de stad.",
+        "De Sint-Wenceslauswijngaard wordt door de exploitant beschreven als een van de oudste wijngaarden van Tsjechië, met een geschiedenis van meer dan duizend jaar. De verbinding met Sint-Wenceslaus is deels historisch en deels legendarisch; de overlevering dat hij zelf de wijnstokken zou hebben geplant moet als legende worden behandeld.",
+        "De Villa zelf biedt een panoramisch uitzicht over Praag, Malá Strana en het historische centrum. De wijnkelder ligt letterlijk in het gesteente onder de Praagse Burcht.",
+        "Voor jullie weekend is vooral de wijngaard/wijnervaring interessant. Het restaurant is een bijzondere optie voor een speciaal moment, maar de actuele seizoenssluiting maakt het geen gegarandeerde lunchplek.",
+        "BIJZONDER Wijngaard + wijn + uitzicht + Burcht.",
+        "WANNEER IN DE ROUTE Tijdens of na de Praagse Burcht, afhankelijk van de actuele openstelling.",
+        "PRAKTISCH De Villa Richter Restaurant is volgens de officiële website vanaf 26 april 2026 gesloten voor de zomerperiode en opent weer in oktober 2026. De wijngaard heeft daarnaast een dagelijks geopende Richter's Street Food Market van 11:00–19:00 en een pergola die afhankelijk is van het weer. Deze onderdelen moeten in de definitieve horeca-app afzonderlijk worden behandeld als de gebruiker ze als horeca wil opnemen; voor deze vaste lijst blijft Villa Richter één item."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "villa-richter.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "u-modre-kachnicky",
+      "name": "U MODRÉ KACHNIČKY",
+      "area": "Malá Strana",
+      "type": "Restaurant / traditionele Tsjechische keuken",
+      "address": "Nebovidská 6, 118 00 Praha 1",
+      "lat": 50.0848236,
+      "lon": 14.4055948,
+      "gpsStatus": "kaartbron",
+      "google": "4,6 / 1.674 beoordelingen",
+      "openingHours": "dagelijks 12:00–23:00",
+      "website": "https://www.umodrekachnicky.cz/en/",
+      "content": "u-modre-kachnicky.html",
+      "contentParagraphs": [
+        "U Modré kachničky is een restaurant voor wie bewust de traditionele kant van de Tsjechische keuken wil ontdekken. De specialiteit ligt bij eend en wild, maar het interessante zit ook in de omgeving.",
+        "De locatie aan de Nebovidskástraat bevindt zich in een historisch barok huis uit de zestiende eeuw. Het restaurant gebruikt dat karakter bewust in het interieur. Volgens de eigen geschiedenis is het symbool van de blauwe eend al lange tijd met het huis verbonden.",
+        "Daarmee past U Modré kachničky goed bij Malá Strana: historische omgeving, traditionele keuken en een interieur dat de geschiedenis niet probeert weg te poetsen.",
+        "BIJZONDER Traditionele Tsjechische keuken + eend/wild + historisch interieur.",
+        "WANNEER IN DE ROUTE Lunch of diner tijdens Malá Strana.",
+        "PRAKTISCH Dagelijks 12:00–23:00 volgens de officiële website."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "u-modre-kachnicky.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "cafe-imperial",
+      "name": "CAFÉ IMPERIAL",
+      "area": "Národní & zuidelijk Nové Město / oostelijke Nieuwe Stad",
+      "type": "Historisch café / restaurant",
+      "address": "Na Poříčí 15, 110 00 Praha 1",
+      "lat": 50.089818,
+      "lon": 14.43265,
+      "gpsStatus": "kaartbron",
+      "google": "4,5 / 6.806 beoordelingen",
+      "openingHours": "dagelijks 07:00–23:00",
+      "website": "https://cafeimperial.cz/en/",
+      "content": "cafe-imperial.html",
+      "contentParagraphs": [
+        "Café Imperial is een plek voor liefhebbers van interieur. Het café maakt deel uit van het Art Deco Imperial Hotel en is gebouwd rond de sfeer van het begin van de twintigste eeuw. Tegelwerk, mozaïeken en decoratieve details maken het interieur bijna net zo belangrijk als de maaltijd.",
+        "Het restaurant behoort tot de bekende historische cafés van Praag. Het combineert klassieke Tsjechische en Midden-Europese gerechten met een luxueuze omgeving. De huidige exploitatie is bovendien verbonden met chef-kok Zdeněk Pohlreich.",
+        "Voor jullie weekend is Imperial vooral interessant als je één keer een echt indrukwekkend historisch interieur wilt combineren met ontbijt, lunch of diner.",
+        "BIJZONDER Art Deco + historisch café + gastronomie.",
+        "WANNEER IN DE ROUTE Ontbijt, lunch of diner wanneer jullie in de oostelijke Nieuwe Stad zijn.",
+        "PRAKTISCH Dagelijks 07:00–23:00. De officiële website adviseert voor reserveringen tijdig te boeken en vermeldt smart-casual kleding."
+      ],
+      "sourceInfo": {
+        "runtimeSource": "json",
+        "migrationStatus": "converted-from-html",
+        "originalHtmlFile": "cafe-imperial.html",
+        "narrativeOrigin": "html",
+        "metadataOrigin": "horeca.json plus embedded location-data"
+      }
+    },
+    {
+      "id": "user-1791719507250",
+      "name": "horeca ook aan json toegevoegd",
+      "type": "horeca",
+      "category": "horeca",
+      "address": "2, Zuiderweg, Verlaat, Oude Niedorp, Hollands Kroon, Noord-Holland, Nederland, 1734 JK, Nederland",
+      "lat": 52.7183994,
+      "lon": 4.8749225,
+      "description": "werk alle logica",
+      "contentParagraphs": [
+        "ook de extra tekst"
+      ],
+      "userCreated": true,
+      "added_at": "2026-10-11T11:51:47.250Z",
+      "photo": "data:image/jpeg;base64,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",
+      "photoName": "Schermafbeelding 2026-10-11 133056.png",
+      "coordinate_status": "geocoded_from_address",
+      "personalData": {
+        "visitedAt": "2026-10-11T11:51:54.954Z"
+      }
+    }
+  ]
+}
