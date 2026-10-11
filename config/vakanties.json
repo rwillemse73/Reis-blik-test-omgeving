@@ -1,0 +1,32 @@
+{
+  "vakanties": [
+    {
+      "id": "trekvogelpad",
+      "naam": "Trekvogelpad",
+      "type": "vast"
+    },
+    {
+      "id": "argentinie-chili",
+      "naam": "Argentinië & Chili",
+      "type": "vast",
+      "onderdelen": [
+        {
+          "id": "el-chalten",
+          "naam": "El Chaltén",
+          "path": "el-chalten"
+        }
+      ]
+    },
+    {
+      "id": "evenement-2026",
+      "naam": "Evenementen 2026",
+      "type": "evenementen",
+      "basePath": "evenement-2026"
+    },
+    {
+      "id": "praag",
+      "naam": "Praag",
+      "type": "vast"
+    }
+  ]
+}
