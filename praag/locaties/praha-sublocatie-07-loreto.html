@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Loreto – Reisblik</title>
+<style>
+@page{size:A4;margin:14mm}
+body{font-family:Calibri,Arial,sans-serif;color:#292929;font-size:12.5pt;line-height:1.45;margin:0}
+main{max-width:180mm;margin:auto}
+h1{font-size:24pt;margin:0 0 2mm;color:#4f4238}
+h2{font-size:13pt;margin:6mm 0 2mm;border-bottom:1px solid #ccc;padding-bottom:1mm;color:#4f4238}
+.intro{font-size:13.5pt;margin-top:0}
+.meta{color:#6c777b;font-size:10.5pt}
+.story p,.didyou p,.person p,.practical p{margin:0 0 1em}
+.didyou{margin:5mm 0;padding:4mm;border-radius:10px;background:#f4f1ea}
+.person{padding:3mm 0}
+ul{padding-left:1.3em}
+li{margin:0.25em 0}
+a{color:#4f4238}
+.small{font-size:9pt;color:#777}
+</style>
+</head>
+<body>
+<main>
+<article>
+<div class="meta">Zelfstandige Reisblik-locatie · Hradčanské náměstí</div>
+<h1>Loreto</h1>
+<div class="intro"><p>Een barok bedevaartcomplex in Hradčany, opgebouwd rond de Santa Casa en een rijke schatkamer.</p></div>
+<h2>📍 In één oogopslag</h2>
+<table>
+<tr><th>Type</th><td>Zelfstandige locatie</td></tr>
+<tr><th>Herkomst</th><td>Hradčanské náměstí</td></tr>
+<tr><th>Historisch belang</th><td>Historisch, architectonisch en/of cultureel relevant</td></tr>
+<tr><th>Gebruik voor Reisblik</th><td>Zelfstandige locatiepagina</td></tr>
+</table>
+<h2>🎤 Het verhaal</h2>
+<div class="story"><p>Het complex werd gebouwd in de periode van de katholieke herovering van Bohemen na de Reformatie. De Santa Casa was bedoeld als pelgrimsoord en de rijke schatkamer moest de religieuze betekenis versterken. De Praagse Zon is daarvan het spectaculairste voorbeeld. De vele kleine kapellen en de centrale Santa Casa maken Loreto tot een compleet bedevaartcomplex, niet alleen een losse kerk.</p>
+<p>Loreto werd in 1626 als bedevaartcomplex gesticht. Centraal staat de Santa Casa, een symbolische kopie van het huis van Maria in Loreto in Italië. De Praagse Zon, een rijk versierde monstrans met 6.222 diamanten, behoort tot de bekendste schatten. Verhalen over wonderen en de Santa Casa behoren tot de religieuze overlevering.</p></div>
+<div class="didyou"><strong>💡 Wist je dat?</strong><p>De Praagse Zon, een monstrans uit de 17e eeuw, is bezet met 6.222 diamanten en is een van de bekendste objecten van de Loreto-schatkamer.</p></div>
+<h2>👤 Persoon uit het verhaal</h2><div class="person"><p>Benigna Katharina von Lobkowicz.</p></div>
+<h2>Wat zie je hier?</h2>
+<ul>
+<li>Santa Casa</li>
+<li>barokke kerk</li>
+<li>klokkenspel</li>
+<li>schatkamer met de Praagse Zon</li>
+</ul>
+<h2>📍 Praktische informatie</h2><div class="practical"><p>Voor de Santa Casa, kerk en schatkamer gelden eigen bezoekuren; controleer de actuele informatie van Loreto.</p></div>
+<h2>🔗 Bronnen</h2>
+<ul>
+<li>Loreto Prague: <a href="https://www.loreta.cz/en/" target="_blank" rel="noopener">https://www.loreta.cz/en/</a></li>
+<li>Prague City Tourism: <a href="https://prague.eu/en/" target="_blank" rel="noopener">https://prague.eu/en/</a></li>
+</ul>
+</article>
+<div id="location-data" hidden data-location-id="praha-02-hradcanske-namesti-sub-07-loreto" data-location-type="locaties" data-lat="50.0896" data-lon="14.3982" data-gps-status="benadering/gebiedsanker">{
+  "id": "praha-02-hradcanske-namesti-sub-07-loreto",
+  "name": "Loreto",
+  "type": "locaties",
+  "lat": 50.0896,
+  "lon": 14.3982,
+  "gps_status": "benadering/gebiedsanker"
+}</div>
+</main>
+
+<style id="reisblik-visited-style">
+.reisblik-bezocht{display:inline-flex;align-items:center;gap:6px;margin:8px 0 16px;padding:9px 13px;border:1px solid #b9c0c3;border-radius:9px;background:#fff;color:#26353a;font:inherit;cursor:pointer}
+.reisblik-bezocht:hover{filter:brightness(.97)}
+</style>
+<script>
+(function(){
+ const KEY='reisblik_visited_v1';
+ const dataEl=document.getElementById('location-data');
+ if(!dataEl)return;
+ const id=dataEl.dataset.locationId;if(!id)return;
+ const main=document.querySelector('main');if(!main)return;
+ function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+ function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
+ function fmt(iso){return new Intl.DateTimeFormat('nl-NL',{dateStyle:'short',timeStyle:'short'}).format(new Date(iso))}
+ const name=(main.querySelector('h1')?.textContent||id).trim();
+ const type=(dataEl.dataset.locationType||'').trim();
+ const b=document.createElement('button');b.type='button';b.className='reisblik-bezocht';
+ function refresh(){const d=load(),v=d[id];b.textContent=v?'☑ Bezocht — '+fmt(v.visitedAt):'☐ Bezocht';b.setAttribute('aria-pressed',v?'true':'false')}
+ b.addEventListener('click',function(){
+   const d=load();
+   if(d[id])delete d[id];else d[id]={id:id,name:name,category:type,visitedAt:new Date().toISOString()};
+   save(d);refresh();
+ });
+ const h1=main.querySelector('h1');let intro=h1?h1.nextElementSibling:null;
+ while(intro&&intro.tagName!=='P')intro=intro.nextElementSibling;
+ if(intro)intro.insertAdjacentElement('afterend',b);else if(h1)h1.insertAdjacentElement('afterend',b);else main.insertBefore(b,main.firstChild);
+ refresh();
+})();
+</script>
+
+</body>
+</html>

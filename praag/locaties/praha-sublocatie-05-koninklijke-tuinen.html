@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Koninklijke Tuinen – Reisblik</title>
+<style>
+@page{size:A4;margin:14mm}
+body{font-family:Calibri,Arial,sans-serif;color:#292929;font-size:12.5pt;line-height:1.45;margin:0}
+main{max-width:180mm;margin:auto}
+h1{font-size:24pt;margin:0 0 2mm;color:#4f4238}
+h2{font-size:13pt;margin:6mm 0 2mm;border-bottom:1px solid #ccc;padding-bottom:1mm;color:#4f4238}
+.intro{font-size:13.5pt;margin-top:0}
+.meta{color:#6c777b;font-size:10.5pt}
+.story p,.didyou p,.person p,.practical p{margin:0 0 1em}
+.didyou{margin:5mm 0;padding:4mm;border-radius:10px;background:#f4f1ea}
+.person{padding:3mm 0}
+ul{padding-left:1.3em}
+li{margin:0.25em 0}
+a{color:#4f4238}
+.small{font-size:9pt;color:#777}
+</style>
+</head>
+<body>
+<main>
+<article>
+<div class="meta">Zelfstandige Reisblik-locatie · Praagse Burcht</div>
+<h1>Koninklijke Tuinen</h1>
+<div class="intro"><p>Een renaissancistische hof- en tuinzone aan de noordzijde van de Praagse Burcht.</p></div>
+<h2>📍 In één oogopslag</h2>
+<table>
+<tr><th>Type</th><td>Zelfstandige locatie</td></tr>
+<tr><th>Herkomst</th><td>Praagse Burcht</td></tr>
+<tr><th>Historisch belang</th><td>Historisch, architectonisch en/of cultureel relevant</td></tr>
+<tr><th>Gebruik voor Reisblik</th><td>Zelfstandige locatiepagina</td></tr>
+</table>
+<h2>🎤 Het verhaal</h2>
+<div class="story"><p>De aanleg past bij de renaissance, toen vorsten niet alleen een versterkte residentie wilden maar ook een representatief landschap. De Belvedère werd gebouwd voor hofgebruik en laat de overgang zien van middeleeuwse burcht naar renaissancehof. De tuin is daardoor onderdeel van dezelfde machtsgeschiedenis als de paleizen, maar dan in de vorm van architectuur, planten en uitzicht.</p>
+<p>De Koninklijke Tuinen werden in de 16e eeuw aangelegd voor het Habsburgse hof. De Belvedère en andere gebouwen tonen de renaissancistische belangstelling voor tuinen, natuur en representatie. De tuinen vormen een groene tegenhanger van de zware burchtarchitectuur.</p></div>
+<div class="didyou"><strong>💡 Wist je dat?</strong><p>De tuinen behoren tot de vroegste renaissancistische tuinaanleg ten noorden van de Alpen en werden onder Ferdinand I als hoflandschap ontwikkeld.</p></div>
+
+<h2>Wat zie je hier?</h2>
+<ul>
+<li>Belvedère</li>
+<li>renaissancevormgeving</li>
+<li>tuinassen en groenstructuur</li>
+<li>historische hofgebouwen</li>
+</ul>
+<h2>📍 Praktische informatie</h2><div class="practical"><p>De opening van de Koninklijke Tuinen is seizoensgebonden; controleer de actuele informatie van de Praagse Burcht.</p></div>
+<h2>🔗 Bronnen</h2>
+<ul>
+<li>Prague Castle – official visitor information: <a href="https://www.hrad.cz/en/prague-castle-for-visitors/" target="_blank" rel="noopener">https://www.hrad.cz/en/prague-castle-for-visitors/</a></li>
+<li>Prague City Tourism: <a href="https://prague.eu/en/" target="_blank" rel="noopener">https://prague.eu/en/</a></li>
+</ul>
+</article>
+<div id="location-data" hidden data-location-id="praha-01-praagse-burcht-sub-05-koninklijke-tuinen" data-location-type="locaties" data-lat="50.09" data-lon="14.4" data-gps-status="gecontroleerd web/Wikidata">{
+  "id": "praha-01-praagse-burcht-sub-05-koninklijke-tuinen",
+  "name": "Koninklijke Tuinen",
+  "type": "locaties",
+  "lat": 50.09,
+  "lon": 14.4,
+  "gps_status": "gecontroleerd web/Wikidata"
+}</div>
+</main>
+
+<style id="reisblik-visited-style">
+.reisblik-bezocht{display:inline-flex;align-items:center;gap:6px;margin:8px 0 16px;padding:9px 13px;border:1px solid #b9c0c3;border-radius:9px;background:#fff;color:#26353a;font:inherit;cursor:pointer}
+.reisblik-bezocht:hover{filter:brightness(.97)}
+</style>
+<script>
+(function(){
+ const KEY='reisblik_visited_v1';
+ const dataEl=document.getElementById('location-data');
+ if(!dataEl)return;
+ const id=dataEl.dataset.locationId;if(!id)return;
+ const main=document.querySelector('main');if(!main)return;
+ function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+ function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
+ function fmt(iso){return new Intl.DateTimeFormat('nl-NL',{dateStyle:'short',timeStyle:'short'}).format(new Date(iso))}
+ const name=(main.querySelector('h1')?.textContent||id).trim();
+ const type=(dataEl.dataset.locationType||'').trim();
+ const b=document.createElement('button');b.type='button';b.className='reisblik-bezocht';
+ function refresh(){const d=load(),v=d[id];b.textContent=v?'☑ Bezocht — '+fmt(v.visitedAt):'☐ Bezocht';b.setAttribute('aria-pressed',v?'true':'false')}
+ b.addEventListener('click',function(){
+   const d=load();
+   if(d[id])delete d[id];else d[id]={id:id,name:name,category:type,visitedAt:new Date().toISOString()};
+   save(d);refresh();
+ });
+ const h1=main.querySelector('h1');let intro=h1?h1.nextElementSibling:null;
+ while(intro&&intro.tagName!=='P')intro=intro.nextElementSibling;
+ if(intro)intro.insertAdjacentElement('afterend',b);else if(h1)h1.insertAdjacentElement('afterend',b);else main.insertBefore(b,main.firstChild);
+ refresh();
+})();
+</script>
+
+</body>
+</html>

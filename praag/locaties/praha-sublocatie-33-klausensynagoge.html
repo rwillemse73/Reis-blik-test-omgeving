@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Klausensynagoge – Reisblik</title>
+<style>
+@page{size:A4;margin:14mm}
+body{font-family:Calibri,Arial,sans-serif;color:#292929;font-size:12.5pt;line-height:1.45;margin:0}
+main{max-width:180mm;margin:auto}
+h1{font-size:24pt;margin:0 0 2mm;color:#4f4238}
+h2{font-size:13pt;margin:6mm 0 2mm;border-bottom:1px solid #ccc;padding-bottom:1mm;color:#4f4238}
+.intro{font-size:13.5pt;margin-top:0}
+.meta{color:#6c777b;font-size:10.5pt}
+.story p,.didyou p,.person p,.practical p{margin:0 0 1em}
+.didyou{margin:5mm 0;padding:4mm;border-radius:10px;background:#f4f1ea}
+.person{padding:3mm 0}
+ul{padding-left:1.3em}
+li{margin:0.25em 0}
+a{color:#4f4238}
+.small{font-size:9pt;color:#777}
+</style>
+</head>
+<body>
+<main>
+<article>
+<div class="meta">Zelfstandige Reisblik-locatie · Josefov</div>
+<h1>Klausensynagoge</h1>
+<div class="intro"><p>Een barokke synagoge naast de Oude Joodse Begraafplaats.</p></div>
+<h2>📍 In één oogopslag</h2>
+<table>
+<tr><th>Type</th><td>Zelfstandige locatie</td></tr>
+<tr><th>Herkomst</th><td>Josefov</td></tr>
+<tr><th>Historisch belang</th><td>Historisch, architectonisch en/of cultureel relevant</td></tr>
+<tr><th>Gebruik voor Reisblik</th><td>Zelfstandige locatiepagina</td></tr>
+</table>
+<h2>🎤 Het verhaal</h2>
+<div class="story"><p>De synagoge maakte deel uit van het religieuze en sociale hart van Josefov. De ligging naast de oude begraafplaats en de begrafenisbroederschap maakte het gebouw nauw verbonden met de rituelen rond overlijden en herinnering.</p>
+<p>De Klausensynagoge is een barokke synagoge naast de Oude Joodse Begraafplaats. De naam verwijst naar eerdere kleine gebeds- en onderwijsruimten. De ligging maakt duidelijk hoe dicht religieuze en sociale functies in het historische Joodse kwartier bij elkaar lagen.</p></div>
+<div class="didyou"><strong>💡 Wist je dat?</strong><p>De Klausensynagoge is de grootste van de historische synagogen van Josefov en werd na de brand van 1689 in barokke vorm herbouwd.</p></div>
+
+<h2>Wat zie je hier?</h2>
+<ul>
+<li>barokke architectuur</li>
+<li>historische gebedsruimte</li>
+<li>expositie</li>
+<li>ligging naast de begraafplaats</li>
+</ul>
+<h2>📍 Praktische informatie</h2><div class="practical"><p>De synagoge maakt deel uit van het Joods Museum; controleer actuele openingstijden.</p></div>
+<h2>🔗 Bronnen</h2>
+<ul>
+<li>Jewish Museum in Prague: <a href="https://www.jewishmuseum.cz/en/" target="_blank" rel="noopener">https://www.jewishmuseum.cz/en/</a></li>
+<li>Prague City Tourism: <a href="https://prague.eu/en/" target="_blank" rel="noopener">https://prague.eu/en/</a></li>
+</ul>
+</article>
+<div id="location-data" hidden data-location-id="praha-08-josefov-sub-33-klausensynagoge" data-location-type="locaties" data-lat="50.089928" data-lon="14.417239" data-gps-status="gecontroleerd web">{
+  "id": "praha-08-josefov-sub-33-klausensynagoge",
+  "name": "Klausensynagoge",
+  "type": "locaties",
+  "lat": 50.089928,
+  "lon": 14.417239,
+  "gps_status": "gecontroleerd web"
+}</div>
+</main>
+
+<style id="reisblik-visited-style">
+.reisblik-bezocht{display:inline-flex;align-items:center;gap:6px;margin:8px 0 16px;padding:9px 13px;border:1px solid #b9c0c3;border-radius:9px;background:#fff;color:#26353a;font:inherit;cursor:pointer}
+.reisblik-bezocht:hover{filter:brightness(.97)}
+</style>
+<script>
+(function(){
+ const KEY='reisblik_visited_v1';
+ const dataEl=document.getElementById('location-data');
+ if(!dataEl)return;
+ const id=dataEl.dataset.locationId;if(!id)return;
+ const main=document.querySelector('main');if(!main)return;
+ function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+ function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
+ function fmt(iso){return new Intl.DateTimeFormat('nl-NL',{dateStyle:'short',timeStyle:'short'}).format(new Date(iso))}
+ const name=(main.querySelector('h1')?.textContent||id).trim();
+ const type=(dataEl.dataset.locationType||'').trim();
+ const b=document.createElement('button');b.type='button';b.className='reisblik-bezocht';
+ function refresh(){const d=load(),v=d[id];b.textContent=v?'☑ Bezocht — '+fmt(v.visitedAt):'☐ Bezocht';b.setAttribute('aria-pressed',v?'true':'false')}
+ b.addEventListener('click',function(){
+   const d=load();
+   if(d[id])delete d[id];else d[id]={id:id,name:name,category:type,visitedAt:new Date().toISOString()};
+   save(d);refresh();
+ });
+ const h1=main.querySelector('h1');let intro=h1?h1.nextElementSibling:null;
+ while(intro&&intro.tagName!=='P')intro=intro.nextElementSibling;
+ if(intro)intro.insertAdjacentElement('afterend',b);else if(h1)h1.insertAdjacentElement('afterend',b);else main.insertBefore(b,main.firstChild);
+ refresh();
+})();
+</script>
+
+</body>
+</html>

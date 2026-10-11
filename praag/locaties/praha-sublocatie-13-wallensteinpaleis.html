@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wallensteinpaleis – Reisblik</title>
+<style>
+@page{size:A4;margin:14mm}
+body{font-family:Calibri,Arial,sans-serif;color:#292929;font-size:12.5pt;line-height:1.45;margin:0}
+main{max-width:180mm;margin:auto}
+h1{font-size:24pt;margin:0 0 2mm;color:#4f4238}
+h2{font-size:13pt;margin:6mm 0 2mm;border-bottom:1px solid #ccc;padding-bottom:1mm;color:#4f4238}
+.intro{font-size:13.5pt;margin-top:0}
+.meta{color:#6c777b;font-size:10.5pt}
+.story p,.didyou p,.person p,.practical p{margin:0 0 1em}
+.didyou{margin:5mm 0;padding:4mm;border-radius:10px;background:#f4f1ea}
+.person{padding:3mm 0}
+ul{padding-left:1.3em}
+li{margin:0.25em 0}
+a{color:#4f4238}
+.small{font-size:9pt;color:#777}
+</style>
+</head>
+<body>
+<main>
+<article>
+<div class="meta">Zelfstandige Reisblik-locatie · Malá Strana</div>
+<h1>Wallensteinpaleis</h1>
+<div class="intro"><p>Een enorm vroeg-17e-eeuws aristocratisch paleis dat tegenwoordig de Tsjechische Senaat huisvest.</p></div>
+<h2>📍 In één oogopslag</h2>
+<table>
+<tr><th>Type</th><td>Zelfstandige locatie</td></tr>
+<tr><th>Herkomst</th><td>Malá Strana</td></tr>
+<tr><th>Historisch belang</th><td>Historisch, architectonisch en/of cultureel relevant</td></tr>
+<tr><th>Gebruik voor Reisblik</th><td>Zelfstandige locatiepagina</td></tr>
+</table>
+<h2>🎤 Het verhaal</h2>
+<div class="story"><p>Wallenstein wilde met het complex een positie creëren die nauwelijks onderdeed voor een vorstelijke residentie. Hij liet meerdere huizen verdwijnen om ruimte te maken voor het paleis, de tuin en bijgebouwen. Zijn politieke loopbaan eindigde abrupt in 1634 toen hij in Eger werd vermoord. Het paleis bleef bestaan en heeft tegenwoordig opnieuw een politieke functie als zetel van de Senaat.</p>
+<p>Het Wallensteinpaleis werd in de 17e eeuw gebouwd voor Albrecht von Wallenstein. Hij liet een enorm complex van paleis, tuin en dienstgebouwen creëren. Tegenwoordig is het de zetel van de Tsjechische Senaat, waardoor de historische architectuur nog steeds een bestuurlijke functie heeft.</p></div>
+<div class="didyou"><strong>💡 Wist je dat?</strong><p>Wallenstein liet zelfs een kunstmatige grotmuur, de &#x27;grottenwand&#x27;, in de tuin aanleggen; de tuin is ontworpen als onderdeel van het totale machtsvertoon van het paleis.</p></div>
+<h2>👤 Persoon uit het verhaal</h2><div class="person"><p>Albrecht von Wallenstein.</p></div>
+<h2>Wat zie je hier?</h2>
+<ul>
+<li>monumentale paleisgevel</li>
+<li>Sala Terrena</li>
+<li>Senaatsruimten</li>
+<li>verbinding tussen paleis en tuin</li>
+</ul>
+<h2>📍 Praktische informatie</h2><div class="practical"><p>De toegankelijkheid van het Senaatscomplex en de tuin is afhankelijk van de actuele openstelling en parlementaire activiteiten.</p></div>
+<h2>🔗 Bronnen</h2>
+<ul>
+<li>Senate of the Parliament of the Czech Republic: <a href="https://www.senat.cz/?lang=en" target="_blank" rel="noopener">https://www.senat.cz/?lang=en</a></li>
+<li>Prague City Tourism: <a href="https://prague.eu/en/" target="_blank" rel="noopener">https://prague.eu/en/</a></li>
+</ul>
+</article>
+<div id="location-data" hidden data-location-id="praha-03-mala-strana-sub-13-wallensteinpaleis" data-location-type="locaties" data-lat="50.09" data-lon="14.40667" data-gps-status="gecontroleerd web/Wikimedia">{
+  "id": "praha-03-mala-strana-sub-13-wallensteinpaleis",
+  "name": "Wallensteinpaleis",
+  "type": "locaties",
+  "lat": 50.09,
+  "lon": 14.40667,
+  "gps_status": "gecontroleerd web/Wikimedia"
+}</div>
+</main>
+
+<style id="reisblik-visited-style">
+.reisblik-bezocht{display:inline-flex;align-items:center;gap:6px;margin:8px 0 16px;padding:9px 13px;border:1px solid #b9c0c3;border-radius:9px;background:#fff;color:#26353a;font:inherit;cursor:pointer}
+.reisblik-bezocht:hover{filter:brightness(.97)}
+</style>
+<script>
+(function(){
+ const KEY='reisblik_visited_v1';
+ const dataEl=document.getElementById('location-data');
+ if(!dataEl)return;
+ const id=dataEl.dataset.locationId;if(!id)return;
+ const main=document.querySelector('main');if(!main)return;
+ function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+ function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
+ function fmt(iso){return new Intl.DateTimeFormat('nl-NL',{dateStyle:'short',timeStyle:'short'}).format(new Date(iso))}
+ const name=(main.querySelector('h1')?.textContent||id).trim();
+ const type=(dataEl.dataset.locationType||'').trim();
+ const b=document.createElement('button');b.type='button';b.className='reisblik-bezocht';
+ function refresh(){const d=load(),v=d[id];b.textContent=v?'☑ Bezocht — '+fmt(v.visitedAt):'☐ Bezocht';b.setAttribute('aria-pressed',v?'true':'false')}
+ b.addEventListener('click',function(){
+   const d=load();
+   if(d[id])delete d[id];else d[id]={id:id,name:name,category:type,visitedAt:new Date().toISOString()};
+   save(d);refresh();
+ });
+ const h1=main.querySelector('h1');let intro=h1?h1.nextElementSibling:null;
+ while(intro&&intro.tagName!=='P')intro=intro.nextElementSibling;
+ if(intro)intro.insertAdjacentElement('afterend',b);else if(h1)h1.insertAdjacentElement('afterend',b);else main.insertBefore(b,main.firstChild);
+ refresh();
+})();
+</script>
+
+</body>
+</html>
