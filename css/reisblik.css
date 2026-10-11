@@ -1,0 +1,884 @@
+body{margin:0;font-family:system-ui,sans-serif;background:#f4f1ea;color:#26353a}
+header{background:#fff;padding:15px;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:1000;position:relative}
+h1{margin:0;font-size:20px}.sub{font-size:12px;color:#6c777b}
+.version{position:absolute;right:14px;top:14px;font-size:11px;color:#6c777b;background:#eee;padding:5px 8px;border-radius:12px}
+#map{height:52vh;min-height:350px}.panel{padding:14px}
+button{padding:10px 13px;border:0;border-radius:10px;background:#26353a;color:#fff;margin:3px}
+.status{font-size:13px;margin:8px 3px}.card{background:#fff;border-radius:14px;padding:14px;margin:10px 0;border:1px solid #ddd}
+.card h2{margin:0 0 4px}.meta{font-size:12px;color:#6c777b}.story{font-size:14px;line-height:1.55;margin-top:8px}
+.error{background:#ffe2e2;padding:12px;border-radius:10px;margin:10px 0;font-size:13px}
+.content-meta{font-size:11px;color:#6c777b;background:#f0eee9;padding:8px;border-radius:9px;margin-top:8px}.extra-info{margin-top:12px;padding-top:10px;border-top:1px solid #eee}.extra-item{background:#f7f6f2;border-radius:9px;padding:9px;margin:7px 0;font-size:13px}.extra-date{font-size:11px;color:#6c777b;font-weight:600}.notes{margin-top:12px;padding-top:10px;border-top:1px solid #eee}.note{background:#f7f6f2;border-radius:9px;padding:8px;margin:7px 0;font-size:13px}.notehead{font-size:11px;color:#6c777b;font-weight:600}
+
+.photo-field img.location-add-preview{display:block;max-width:100%;width:auto;height:auto;max-height:300px;object-fit:contain;border-radius:10px;margin-top:8px}
+
+
+.location-photo-placeholder img.location-photo{
+  display:block;
+  max-width:100%;
+  width:auto;
+  height:auto;
+  max-height:300px;
+  object-fit:contain;
+}
+
+.trekvogel-category-marker{background:transparent!important;border:0!important}
+.trekvogel-category-marker span{
+ display:flex;align-items:center;justify-content:center;
+ width:34px;height:34px;border-radius:50%;
+ background:#fff;border:2px solid #5b4636;
+ box-shadow:0 2px 5px rgba(0,0,0,.28);
+ font-size:19px;line-height:1
+}
+.nav-btn{cursor:pointer;margin:4px;padding:7px 10px;border-radius:8px;border:1px solid #ccc;background:#fff}.nav-btn:hover{filter:brightness(.97)}
+.map-action{cursor:pointer;border:1px solid #c9c9c9;background:#fff;color:#26353a;border-radius:8px;padding:7px 10px;font-size:14px}.map-action:hover{filter:brightness(.97)}
+
+/* v6.1 — categorieën als aan/uit-filters */
+.user-functions{margin-bottom:14px}
+.user-buttons{display:flex;gap:8px;width:100%}
+.user-buttons button{flex:1 1 0;margin:0}
+.user-secondary-buttons{
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  width:100%;
+}
+.reisdag-main-buttons,.reisdag-quick-buttons{
+  width:100%;
+}
+.reisdag-main-buttons button,.reisdag-quick-buttons button{
+  flex:1 1 0;
+}
+.maintenance-functions,.test-functions{margin-top:16px;padding-top:12px;border-top:1px solid #ddd7cd}
+.maintenance-title,.test-title{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:700;color:#68777b;margin:0 0 8px}
+.maintenance-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.maintenance-buttons button{margin:0}
+.test-controls{display:flex;align-items:center;gap:8px;width:100%}
+.test-controls button{margin:0;flex:0 0 auto}
+.test-controls input{flex:1 1 auto}
+#testAddressStatus31{margin-top:8px}
+.panel-switch{position:relative;display:inline-flex;align-items:center;width:46px;height:26px;flex:0 0 auto;cursor:pointer}
+.panel-switch input{position:absolute;opacity:0;width:0;height:0}
+.panel-switch-slider{position:absolute;inset:0;background:#9aa4a7;border-radius:999px;transition:.18s}
+.panel-switch-slider::before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.18s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.panel-switch input:checked + .panel-switch-slider{background:#26353a}
+.panel-switch input:checked + .panel-switch-slider::before{transform:translateX(20px)}
+.panel-switch input:focus-visible + .panel-switch-slider{outline:2px solid #26353a;outline-offset:2px}
+.panel-functions-hidden{display:none !important}
+@media (max-width:600px){
+  .user-buttons{gap:5px}
+  .user-buttons button{font-size:13px;padding-left:7px;padding-right:7px}
+  .test-controls{flex-wrap:wrap}
+  .test-controls input{flex:1 1 180px}
+}
+
+/* Persistent Reisblik close control */
+#reisblikCloseLayer{
+  position:fixed !important;
+  top:8px !important;
+  right:10px !important;
+  z-index:2147483647 !important;
+  pointer-events:none !important;
+}
+#reisblikCloseBtn{
+  position:relative !important;
+  display:block !important;
+  width:36px !important;
+  height:36px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:#26353a !important;
+  color:#fff !important;
+  font-family:Arial,sans-serif !important;
+  font-size:28px !important;
+  font-weight:400 !important;
+  line-height:36px !important;
+  text-align:center !important;
+  cursor:pointer !important;
+  box-shadow:0 2px 6px rgba(0,0,0,.25) !important;
+  pointer-events:auto !important;
+}
+#reisblikCloseBtn:hover{background:#1b272b !important}
+#reisblikCloseBtn:active{transform:scale(.96)}
+
+.version-inline{
+  font-size:12px !important;
+  font-weight:400 !important;
+  color:#6c777b !important;
+  margin-left:8px !important;
+  vertical-align:middle !important;
+  white-space:nowrap !important;
+}
+
+.rb6710-visited{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin:7px 0 8px;
+  padding:7px 10px;
+  border:1px solid #bbb;
+  border-radius:8px;
+  background:#fff;
+  font:inherit;
+  color:inherit;
+}
+.rb6710-visited input{width:18px;height:18px;margin:0}
+.rb6710-visited-date{font-size:.9em;color:#6c777b}
+/* Reisblik 7.0 – Bezocht */
+.reisblik-visited,.rb6710-visited{
+ display:inline-flex;align-items:center;gap:8px;margin:7px 0 8px;
+ padding:7px 10px;border:1px solid #bbb;border-radius:8px;
+ background:#fff;font:inherit;color:inherit;
+}
+.reisblik-visited input,.rb6710-visited input{width:18px;height:18px;margin:0}
+.reisblik-visited-date,.rb6710-visited-date{font-size:.9em;color:#6c777b}
+
+.reisblik-visited{display:inline-flex;align-items:center;gap:8px;margin:7px 0 8px;padding:7px 10px;border:1px solid #bbb;border-radius:8px;background:#fff;font:inherit;color:inherit}
+.reisblik-visited input{width:18px;height:18px;margin:0}
+.reisblik-visited-date{font-size:.9em;color:#6c777b}
+
+/* Reisblik 7.2 – Mijn reisdag date picker */
+.reisdag-btn{
+  display:block;width:100%;box-sizing:border-box;margin:8px 0;padding:10px 12px;
+  border:1px solid #bbb;border-radius:8px;background:#fff;font:inherit;text-align:left;cursor:pointer;
+}
+.reisdag-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99999;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.reisdag-modal{
+  width:min(420px,100%);background:#fff;border-radius:12px;padding:18px;
+  box-shadow:0 6px 30px rgba(0,0,0,.3);
+}
+.reisdag-modal h3{margin:0 0 12px}
+.reisdag-modal input[type=date]{width:100%;box-sizing:border-box;padding:10px;font:inherit;margin:6px 0 14px}
+.reisdag-date-range{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;margin:8px 0 14px}
+.reisdag-date-range label{font-size:13px;color:#5f6b70}
+.reisdag-date-range input[type=date]{width:100%;box-sizing:border-box;padding:10px;font:inherit;margin:0}
+.reisdag-actions{display:flex;gap:8px;justify-content:flex-end}
+.reisdag-actions button{padding:8px 14px;border:1px solid #aaa;border-radius:7px;background:#fff;font:inherit}
+.reisdag-status{margin-top:10px;font-size:.9em}
+
+/* Reisblik 7.3 – lijst Mijn reisdag */
+.reisdag-results{margin-top:14px;border-top:1px solid #ccc;padding-top:12px}
+.reisdag-results h4{margin:0 0 8px}
+.reisdag-results ul{margin:0;padding-left:20px}
+.reisdag-results li{margin:6px 0}
+.reisdag-empty{font-size:.92em;color:#666}
+
+/* 7.3.1 – Mijn reisdag zichtbaar resultatenpaneel */
+.reisdag-results{
+  display:block;
+  margin:10px 12px 14px;
+  padding:12px;
+  border:1px solid #aaa;
+  border-radius:8px;
+  background:#fff;
+  color:inherit;
+  box-sizing:border-box;
+}
+.reisdag-results h4{margin:0 0 8px;font-size:1em}
+.reisdag-results ul{margin:6px 0 0;padding-left:20px}
+.reisdag-results li{margin:6px 0}
+.reisdag-summary{font-size:.9em;margin-bottom:6px}
+.reisdag-empty{font-size:.92em;color:#666}
+
+/* 7.3.2 – Mijn reisdag zichtbaarheid */
+.reisdag-btn{
+  display:inline-block !important;
+  width:auto !important;
+  box-sizing:border-box;
+  margin:0 !important;
+  padding:10px 13px !important;
+  border:0 !important;
+  border-radius:10px !important;
+  background:#26353a !important;
+  color:#fff !important;
+  font:inherit;
+  text-align:left;
+  cursor:pointer;
+}
+.reisdag-actions button{
+  background:#26353a !important;
+  color:#fff !important;
+  border:0 !important;
+  border-radius:8px !important;
+  cursor:pointer;
+}
+.reisdag-results{
+  display:block !important;
+  width:100%;
+  box-sizing:border-box;
+}
+
+/* 7.3.3 – expliciete zichtbaarheid Mijn reisdag */
+#reisdagOpenBtn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:auto !important;
+  min-width:190px !important;
+  min-height:44px !important;
+  padding:10px 16px !important;
+  margin:0 8px 0 0 !important;
+  box-sizing:border-box !important;
+  background:#26353a !important;
+  color:#ffffff !important;
+  border:0 !important;
+  border-radius:10px !important;
+  font-family:inherit !important;
+  font-size:inherit !important;
+  line-height:1.2 !important;
+  text-align:center !important;
+  opacity:1 !important;
+  visibility:visible !important;
+}
+#reisdagOpenBtn::first-letter{color:#ffffff !important}
+#reisdagCancelBtn,#reisdagChooseBtn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-width:125px !important;
+  min-height:44px !important;
+  padding:9px 14px !important;
+  background:#26353a !important;
+  color:#ffffff !important;
+  border:0 !important;
+  border-radius:8px !important;
+  font-family:inherit !important;
+  font-size:inherit !important;
+  line-height:1.2 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+}
+
+/* 7.4.1 – DOC download */
+#reisdagWordBtn{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-width:150px !important;
+  min-height:44px !important;
+  padding:10px 15px !important;
+  background:#26353a !important;
+  color:#fff !important;
+  border:0 !important;
+  border-radius:9px !important;
+  cursor:pointer !important;
+}
+
+/* 7.5 – Bezocht beschikbaar zonder GPS */
+
+/* 7.6 – Bezocht in vaste HTML-content */
+.reisblik-fixed-visited{
+  margin:10px 0 14px;
+}
+.reisblik-fixed-visited .reisblik-visited{
+  display:inline-flex;
+}
+
+
+/* Reisblik 8.0.1 — stap 2: backupvenster */
+.backup-overlay{
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:3200;
+  padding:14px;
+  overflow:auto;
+}
+.backup-modal{
+  background:#fff;
+  color:#26353a;
+  border-radius:16px;
+  padding:18px;
+  max-width:600px;
+  margin:25px auto;
+  box-sizing:border-box;
+}
+.backup-modal h2{
+  margin:0 0 10px;
+}
+.backup-list{
+  margin:14px 0 18px;
+  line-height:1.8;
+}
+.backup-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.backup-actions button{
+  min-height:44px;
+  padding:10px 15px;
+  border:0;
+  border-radius:9px;
+  cursor:pointer;
+}
+.backup-secondary{
+  background:#e8e5df !important;
+  color:#26353a !important;
+}
+.backup-status{
+  margin-top:12px;
+  min-height:20px;
+  font-size:13px;
+  color:#6c777b;
+}
+
+
+/* Reisblik 8.0.6 — weesdata opschonen */
+.cleanup-overlay{position:fixed;inset:0;background:#0008;z-index:3250;padding:14px;overflow:auto}
+.cleanup-modal{background:#fff;color:#26353a;border-radius:16px;padding:18px;max-width:650px;margin:25px auto;box-sizing:border-box}
+.cleanup-modal h2{margin:0 0 10px}
+.cleanup-status{margin:12px 0;font-weight:600}
+.cleanup-results{max-height:48vh;overflow:auto;border:1px solid #ddd;border-radius:10px;padding:8px}
+.cleanup-item{display:flex;gap:10px;align-items:flex-start;padding:10px 6px;border-bottom:1px solid #eee}
+.cleanup-item:last-child{border-bottom:0}
+.cleanup-item input{margin-top:4px}
+.cleanup-item-title{font-weight:700}
+.cleanup-item-detail{font-size:13px;color:#6c777b;margin-top:3px;white-space:pre-wrap;overflow-wrap:anywhere}
+.cleanup-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.cleanup-actions button{min-height:44px;padding:10px 15px;border:0;border-radius:9px;cursor:pointer}
+.cleanup-secondary{background:#e8e5df !important;color:#26353a !important}
+
+/* Reisblik 8.2 — zoekfunctie stap 2: popup */
+.search-overlay{
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:3300;
+  padding:14px;
+  box-sizing:border-box;
+  overflow:auto;
+  align-items:center;
+  justify-content:center;
+}
+.search-modal{
+  background:#fff;
+  color:#26353a;
+  border-radius:16px;
+  padding:18px;
+  width:100%;
+  max-width:600px;
+  margin:0;
+  box-sizing:border-box;
+}
+.search-modal h2{margin:0 0 14px}
+.search-modal label{display:block;font-weight:600;margin-bottom:6px}
+.search-modal input{
+  width:100%;
+  box-sizing:border-box;
+  padding:11px;
+  border:1px solid #ccc;
+  border-radius:9px;
+  font-size:16px;
+}
+.search-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.search-actions button{min-height:44px;padding:10px 15px;border:0;border-radius:9px;cursor:pointer}
+.search-status{margin-top:12px;min-height:20px;font-size:13px;color:#6c777b}
+
+/* Reisblik 8.3 — zoekresultaten */
+.search-results{
+  margin-top:14px;
+  max-height:48vh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.search-result{
+  width:100%;
+  text-align:left;
+  background:#f7f7f5;
+  color:#26353a;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:11px 12px;
+  cursor:pointer;
+}
+.search-result:hover{border-color:#999}
+.search-result-title{display:block;font-weight:700;font-size:15px}
+.search-result-meta{display:block;margin-top:3px;font-size:12px;color:#6c777b}
+.search-result-snippet{display:block;margin-top:6px;font-size:13px;line-height:1.4}
+.search-result mark{font-weight:700}
+.search-no-results{padding:12px;background:#f7f7f5;border-radius:10px;color:#6c777b}
+
+
+/* Reisblik 8.4.2 — microfoon stap 3 en 4 */
+.speech-controls{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 4px}
+.speech-controls button{min-height:44px}
+.speech-stop{background:#e8e5df !important;color:#26353a !important}
+.speech-status{min-height:20px;margin:5px 0 8px;font-size:13px;color:#6c777b}
+
+/* Reisblik 8.6.6 – aparte kaart voor Mijn reisdag */
+.reisdag-map-overlay{
+  position:fixed;
+  inset:0;
+  z-index:3400;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+  box-sizing:border-box;
+  background:#0008;
+}
+.reisdag-map-modal{
+  width:min(1000px,96vw);
+  height:min(760px,92vh);
+  background:#fff;
+  color:#26353a;
+  border-radius:16px;
+  padding:14px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.reisdag-map-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.reisdag-map-head h3{margin:0}
+.reisdag-map-close{
+  min-height:42px;
+  padding:9px 14px;
+  border:0;
+  border-radius:8px;
+  background:#26353a;
+  color:#fff;
+  cursor:pointer;
+}
+.reisdag-map-status{font-size:14px;color:#6c777b;min-height:20px}
+.reisdag-map{
+  flex:1;
+  min-height:300px;
+  width:100%;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid #ddd;
+}
+@media(max-width:600px){
+  .reisdag-map-overlay{padding:8px}
+  .reisdag-map-modal{width:100%;height:94vh;padding:10px;border-radius:12px}
+}
+
+/* Reisblik 8.6.7 — altijd zichtbare knop naar boven */
+#reisblikTopLayer{
+  position:fixed !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:12px !important;
+  z-index:2147483647 !important;
+  pointer-events:none !important;
+  display:flex !important;
+  justify-content:flex-end !important;
+  padding:0 14px !important;
+  box-sizing:border-box !important;
+}
+#reisblikTopBtn{
+  pointer-events:auto !important;
+  width:44px !important;
+  height:44px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:#26353a !important;
+  color:#fff !important;
+  font-family:Arial,sans-serif !important;
+  font-size:25px !important;
+  font-weight:700 !important;
+  line-height:44px !important;
+  text-align:center !important;
+  cursor:pointer !important;
+  box-shadow:0 2px 7px rgba(0,0,0,.28) !important;
+}
+#reisblikTopBtn:hover{background:#1b272b !important}
+#reisblikTopBtn:active{transform:scale(.96)}
+@media(max-width:600px){
+  #reisblikTopLayer{bottom:10px !important;padding:0 10px !important}
+  #reisblikTopBtn{width:42px !important;height:42px !important;line-height:42px !important;font-size:24px !important}
+}
+
+/* Reisblik 8.8.0 — Agenda basis */
+.agenda-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:5000;
+  display:flex;align-items:center;justify-content:center;padding:14px;box-sizing:border-box;
+}
+.agenda-modal{
+  width:min(760px,96vw);max-height:90vh;overflow:auto;background:#fff;color:#26353a;
+  border-radius:16px;padding:18px;box-sizing:border-box;box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+.agenda-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.agenda-head h2{margin:0}
+.agenda-close{border:0;border-radius:8px;padding:9px 14px;background:#26353a;color:#fff;cursor:pointer}
+.agenda-intro{color:#536166;line-height:1.5}
+.agenda-location-card,.agenda-requirements{background:#f5f5f2;border-radius:12px;padding:13px;margin-top:12px;line-height:1.5}
+.agenda-muted{font-size:13px;color:#6c777b;margin-top:5px}
+.agenda-section{margin-top:18px}
+.agenda-section h3{margin-bottom:8px}
+.agenda-empty{border:1px dashed #c8c8c3;border-radius:10px;padding:16px;color:#6c777b}
+.agenda-requirements p{margin:6px 0 0;font-size:14px}
+.agenda-btn{background:#26353a;color:#fff;border:0;border-radius:9px;padding:10px 13px;cursor:pointer}
+
+/* Reisblik 8.8.2 — lokaal opgeslagen evenementen */
+.agenda-event-card{border:1px solid #d4d8d9;border-radius:10px;padding:12px;margin:10px 0;background:#fff}
+.agenda-event-title{font-weight:700;font-size:18px;margin-bottom:7px}
+.agenda-remove-btn{margin-top:9px;border:1px solid #cfd4d5;border-radius:8px;padding:7px 10px;background:#f2f2ef;color:#26353a;cursor:pointer}
+
+
+/* Reisblik 8.8.4 – evenementenzoeker */
+.agenda-search-panel{background:#f5f5f2;border-radius:12px;padding:14px;margin-top:14px}
+.agenda-search-panel h3{margin:0 0 10px}
+.agenda-search-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px}
+.agenda-search-grid label,.agenda-api-row label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:14px}
+.agenda-search-grid input,.agenda-api-row input{box-sizing:border-box;width:100%;padding:9px;border:1px solid #c9cdce;border-radius:8px;background:#fff;font:inherit;font-weight:400}
+.agenda-api-row{display:flex;align-items:end;gap:10px;margin-top:10px}
+.agenda-api-row label{flex:1}
+.agenda-search-status{margin:10px 0;color:#536166;font-weight:600}
+.agenda-search-help{padding:12px;border:1px dashed #c8c8c3;border-radius:10px;color:#536166;background:#fff}
+.agenda-search-card{border:1px solid #d4d8d9;border-radius:10px;padding:12px;margin:10px 0;background:#fff}
+.agenda-search-title{font-weight:700;font-size:18px;margin-bottom:5px}
+.agenda-search-meta{color:#536166;margin-bottom:7px}
+.agenda-match{margin-top:9px;padding:9px;border-radius:8px;background:#eef2f1;line-height:1.4}
+.agenda-search-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.agenda-save-label{display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:600}
+.agenda-save-label input{width:auto}
+.agenda-source-link{display:inline-block;padding:7px 10px;border:1px solid #cfd4d5;border-radius:8px;color:#26353a;text-decoration:none;background:#f2f2ef}
+@media(max-width:760px){.agenda-search-grid{grid-template-columns:1fr 1fr}.agenda-api-row{flex-direction:column;align-items:stretch}}
+@media(max-width:480px){.agenda-search-grid{grid-template-columns:1fr}}
+
+/* Agenda 8.8.8 – JSON-import versus permanente agenda */
+.agenda-event-source{margin-top:8px}.agenda-event-source a{font-weight:600}.agenda-event-description{margin-top:8px}.agenda-match-reasons{margin-top:7px;font-size:13px}.agenda-save-btn{margin-top:10px}.agenda-saved-note{margin-top:10px;font-weight:600}.agenda-section+.agenda-section{margin-top:18px}
+
+.agenda-import-status{margin-top:8px;font-size:14px}.agenda-import-section{border-top:1px solid #ddd;padding-top:14px}
+
+/* v8.8.13 — Agenda: komende evenementen bovenaan, bezocht/afgelopen in inklapbaar archief */
+.agenda-subsection-title{font-weight:700;font-size:16px;margin:12px 0 8px;color:#26353a}
+.agenda-subempty{margin:8px 0}
+.agenda-archive{margin-top:16px;border:1px solid #d4d8d9;border-radius:10px;background:#f7f6f2;overflow:hidden}
+.agenda-archive summary{cursor:pointer;font-weight:700;padding:12px 13px;list-style-position:inside}
+.agenda-archive summary:hover{background:#efeee9}
+.agenda-archive-list{padding:0 10px 10px}
+
+
+/* Reisblik 9.0.0 — fase 1: vakantiekeuze */
+.vakantie-keuze{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:10px 0 12px;
+  padding:10px 12px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:12px;
+}
+.vakantie-keuze select{
+  min-width:240px;
+  max-width:100%;
+  padding:9px 10px;
+  border:1px solid #bbb;
+  border-radius:9px;
+  background:#fff;
+  font-size:15px;
+}
+.vakantie-status{
+  width:100%;
+  font-size:12px;
+  color:#6c777b;
+}
+
+/* Reisblik 9.0.1 — fase 2: vakantiekeuze visueel verfijnd */
+.vakantie-keuze{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:12px 0 14px;
+  padding:11px 13px;
+  background:linear-gradient(180deg,#f8fbfc,#f1f5f5);
+  border:1px solid #cfd8da;
+  border-radius:14px;
+  box-shadow:0 2px 6px rgba(38,53,58,.08);
+}
+.vakantie-keuze label{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:#26353a;
+  font-size:15px;
+  white-space:nowrap;
+}
+.vakantie-keuze label::before{content:'🧳';font-size:18px}
+.vakantie-keuze select{
+  min-width:250px;
+  max-width:100%;
+  padding:10px 38px 10px 12px;
+  border:1px solid #aebbbe;
+  border-radius:10px;
+  background:#fff;
+  color:#17384a;
+  font-size:15px;
+  font-weight:600;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
+}
+.vakantie-keuze select:focus{
+  outline:2px solid rgba(38,53,58,.18);
+  outline-offset:1px;
+  border-color:#71878e;
+}
+.vakantie-keuze select:disabled{background:#f5f5f3;color:#6c777b;cursor:not-allowed}
+.vakantie-status{
+  width:100%;
+  margin-left:29px;
+  font-size:12px;
+  color:#6c777b;
+}
+@media (max-width:600px){
+  .vakantie-keuze{align-items:stretch}
+  .vakantie-keuze label{width:100%}
+  .vakantie-keuze select{width:100%;min-width:0}
+  .vakantie-status{margin-left:0}
+}
+
+
+/* Reisblik 9.1.0 — laadindicator bij wisselen van vakantie */
+.vakantie-loading{
+  display:inline-block;
+  width:12px;
+  height:12px;
+  margin-right:6px;
+  border:2px solid currentColor;
+  border-right-color:transparent;
+  border-radius:50%;
+  vertical-align:-2px;
+  animation:reisblikVakantieSpin .7s linear infinite;
+}
+@keyframes reisblikVakantieSpin{to{transform:rotate(360deg)}}
+
+/* Reisblik 9.7.1 – Reisdagboek-tussenpagina */
+#reisdagDiaryBtn{
+  display:inline-flex !important;align-items:center !important;justify-content:center !important;
+  min-width:190px !important;min-height:44px !important;padding:10px 15px !important;
+  background:#26353a !important;color:#fff !important;border:0 !important;
+  border-radius:9px !important;cursor:pointer !important;
+}
+
+
+/* Reisblik 9.7.2 – editor Mijn Reisdagboek */
+.dagboek-save-status{margin-top:10px;min-height:22px;color:#315d43;font-weight:700}
+
+/* Reisblik 9.8.6 — losse aantekeningen */
+.notes-btn{min-width:170px !important}
+.notes-modal{max-width:700px}
+.notes-list{display:flex;flex-direction:column;gap:10px}
+.note-item{border:1px solid #ddd;border-radius:10px;padding:12px;background:#fff}
+.note-date{font-size:12px;color:#6c777b;margin-bottom:6px}
+.note-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}
+.note-delete{margin-top:9px;padding:7px 10px;border:0;border-radius:8px;background:#e8e5df;color:#26353a;cursor:pointer}
+.notes-empty{font-size:.92em;color:#666;padding:10px 0}
+
+
+/* Reisblik 9.9.2 — backup app-breed; overige onderhoudsfuncties vakantiegebonden */
+.hub-management-block{margin-top:16px;padding-top:16px;border-top:1px solid #e1e5e6}
+.hub-management-block:first-of-type{margin-top:8px}
+.hub-management-block .maintenance-title,.hub-management-block .test-title{font-size:14px}
+.backup-management-block{margin-top:10px;padding-top:4px}
+.backup-management-block .maintenance-buttons{margin-top:8px}
+#testFunctionsBody{padding-top:4px}
+#testFunctionsControls{display:flex;flex-direction:column;align-items:stretch;gap:9px;max-width:760px}
+#testFunctionsControls .test-control-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+#testFunctionsControls button{margin:0;flex:0 0 auto}
+#testFunctionsControls input{box-sizing:border-box;flex:1 1 320px;min-width:220px;padding:10px 12px;border:1px solid #cbd2d4;border-radius:9px;font:inherit}
+#testAddressStatus31{margin-top:9px}
+@media(max-width:600px){#testFunctionsControls .test-control-row{align-items:stretch}#testFunctionsControls button,#testFunctionsControls input{width:100%;box-sizing:border-box}}
+
+
+/* Reisblik 9.9.4 — actieve vakantie en vakantiearchief krijgen dezelfde rustige kaartopmaak als de bestaande vakantiekeuze. */
+.reisblik-hub .hub-vakantie-layout{
+  margin:12px 0 14px;
+  padding:0;
+  background:linear-gradient(180deg,#f8fbfc,#f1f5f5);
+  border:1px solid #cfd8da;
+  border-radius:14px;
+  box-shadow:0 2px 6px rgba(38,53,58,.08);
+  overflow:hidden;
+}
+.reisblik-hub .hub-vakantie-toggle{
+  width:100%;
+  min-height:48px;
+  padding:10px 13px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:#26353a;
+  font-size:15px;
+  font-weight:700;
+  text-align:left;
+}
+.reisblik-hub .hub-vakantie-layout .hub-section-body{
+  padding:10px 13px 13px;
+  border-top:1px solid #dbe2e4;
+}
+.reisblik-hub .hub-vakantie-layout .hub-label{
+  display:inline-flex;
+  align-items:center;
+  width:auto;
+  margin-right:8px;
+  color:#26353a;
+  font-size:15px;
+  font-weight:600;
+}
+.reisblik-hub .hub-vakantie-layout .hub-select{
+  min-width:250px;
+  max-width:100%;
+  padding:10px 38px 10px 12px;
+  border:1px solid #aebbbe;
+  border-radius:10px;
+  background:#fff;
+  color:#17384a;
+  font-size:15px;
+  font-weight:600;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
+}
+.reisblik-hub .hub-vakantie-layout .hub-primary{
+  margin-top:10px;
+}
+@media(max-width:600px){
+  .reisblik-hub .hub-vakantie-layout .hub-label{display:flex;margin:0 0 6px}
+  .reisblik-hub .hub-vakantie-layout .hub-select{width:100%;min-width:0}
+}
+
+
+/* Reisblik 9.9.5 — startpagina toont alleen de actieve vakantie in de bestaande Vakantie-kaartopmaak. */
+body.reisblik-startscherm #vakantieKeuze{display:none !important;}
+.reisblik-hub .hub-vakantie-layout{
+  margin:0 0 14px;
+  padding:0;
+  background:linear-gradient(180deg,#f8fbfc,#f1f5f5);
+  border:1px solid #cfd8da;
+  border-radius:14px;
+  box-shadow:0 2px 6px rgba(38,53,58,.08);
+  overflow:hidden;
+}
+.reisblik-hub .hub-vakantie-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  min-height:48px;
+}
+.reisblik-hub .hub-vakantie-label{
+  color:#26353a;
+  font-size:17px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.reisblik-hub .hub-vakantie-layout .hub-section-body{
+  padding:10px 16px 14px;
+  border-top:1px solid #dbe2e4;
+}
+.reisblik-hub .hub-vakantie-layout .hub-select{
+  min-width:310px;
+  padding:10px 38px 10px 12px;
+  border:1px solid #aebbbe;
+  border-radius:10px;
+  background:#fff;
+  color:#17384a;
+  font-size:16px;
+  font-weight:600;
+}
+@media(max-width:600px){
+  .reisblik-hub .hub-vakantie-head{flex-direction:column;align-items:stretch;gap:6px;}
+  .reisblik-hub .hub-vakantie-layout .hub-select{width:100%;min-width:0;}
+}
+
+
+/* Reisblik 9.9.6 — Vakantiearchief gebruikt dezelfde kaartopmaak als Actieve vakantie. */
+.reisblik-hub .hub-archief-layout{
+  margin:0 0 14px;
+}
+.reisblik-hub .hub-archief-layout .hub-vakantie-head{
+  min-height:48px;
+}
+.reisblik-hub .hub-archief-layout .hub-section-body{
+  padding:10px 16px 14px;
+}
+
+/* Reisblik 9.9.10 — beheer blijft op de startpagina */
+.start-card-toggle{width:100%;background:#fff;color:#17384a;border:0;border-radius:0;margin:0;text-align:left;cursor:pointer}
+.start-card-toggle:hover{background:#fbfcfc}
+.start-management-block{border-top:1px solid #dfe4e6;padding-top:14px;margin-top:14px}
+.start-management-title{display:flex;align-items:center;justify-content:space-between;font-weight:700;color:#61747d;margin-bottom:8px}
+.start-test-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.start-test-input{flex:1 1 260px;min-width:180px;box-sizing:border-box;padding:11px 13px;border:1px solid #aebdc4;border-radius:11px;font:inherit}
+.start-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99999;display:none;align-items:center;justify-content:center;padding:20px}
+.start-modal{width:min(560px,100%);background:#fff;border-radius:14px;padding:20px;box-shadow:0 8px 35px rgba(0,0,0,.3)}
+.start-modal h2{margin-top:0;color:#17384a}
+.reisblik-logo-mark{display:inline-block;margin-right:7px}
+
+/* Reisblik 9.9.10 — dezelfde app-header op startpagina en werkruimte. */
+.start-app-header{text-align:left;margin:0 auto 26px;max-width:920px;}
+.start-app-title-row h1{margin:0;color:#17384a;font-size:30px;}
+.start-app-datetime{margin-top:6px;font-size:12px;color:#6c777b;}
+.start-app-offline{margin-top:5px;font-size:13px;font-weight:600;color:#176b3a;}
+.start-app-tagline-row{display:flex;align-items:center;gap:14px;margin-top:8px;}
+.start-app-logo{width:64px;height:64px;object-fit:contain;border-radius:12px;}
+.start-app-tagline-row>div:last-child{font-size:18px;font-weight:600;color:#17384a;}
+.start-intro-text{text-align:center;margin-top:18px;color:#61747d;font-size:17px;}
+.app-tagline-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.app-header-logo{width:64px;height:64px;object-fit:contain;border-radius:12px;}
+@media(max-width:700px){
+ .start-app-header{padding:0 4px;}
+ .start-app-tagline-row{align-items:flex-start;}
+ .start-app-logo,.app-header-logo{width:56px;height:56px;}
+}
+
+/* Reisblik 9.9.21 — geselecteerde plaatsen zichtbaar in het werkscherm */
+.vakantie-geselecteerde-onderdelen{
+  margin:10px 0 0 29px;
+  padding:10px 12px;
+  border:1px solid #d8dfe2;
+  border-radius:10px;
+  background:#f8faf9;
+  color:#17384a;
+  font-size:14px;
+}
+.vakantie-geselecteerd-item{
+  display:inline-block;
+  margin:4px 6px 0 0;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#e8eef0;
+  font-weight:600;
+}
+.vakantie-geen-geselecteerde{
+  margin-left:6px;
+  color:#6c777b;
+  font-style:italic;
+}
+
+
+/* ===== Reisquiz 9.9.23 ===== */
+.quiz-btn{background:#e8f1f4!important;color:#17384a!important;font-weight:700!important}
+.quiz-overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;padding:16px;z-index:1600;box-sizing:border-box}
+.quiz-modal{width:min(720px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 14px 50px rgba(0,0,0,.25);padding:20px;box-sizing:border-box}
+.quiz-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:1px solid #dde3e5;padding-bottom:12px;margin-bottom:16px}
+.quiz-head h2{margin:0;color:#17384a}.quiz-context{font-size:13px;color:#6c777b;margin-top:4px}.quiz-close{white-space:nowrap}
+.quiz-progress{font-size:13px;font-weight:700;color:#6c777b;margin-bottom:12px}.quiz-question{font-size:21px;line-height:1.35;margin:0 0 8px;color:#26353a}.quiz-location{font-size:13px;color:#6c777b;margin-bottom:18px}
+.quiz-answers{display:grid;gap:10px}.quiz-answer{width:100%;text-align:left;padding:13px 14px;border:1px solid #c8d2d6;border-radius:10px;background:#f8fafb;color:#17384a;font:inherit;cursor:pointer}.quiz-answer:hover{background:#eef4f6}.quiz-answer:disabled{cursor:default}.quiz-answer.quiz-correct{background:#dff3e6;border-color:#53a56e}.quiz-answer.quiz-wrong{background:#f8e2e2;border-color:#c86a6a}
+.quiz-feedback{margin-top:16px;padding:13px;border-radius:10px;background:#f4f6f7;line-height:1.45}.quiz-feedback p{margin:7px 0 0}.quiz-next{margin-top:14px}.quiz-loading,.quiz-empty{text-align:center;padding:35px 10px;line-height:1.5}.quiz-empty h3{margin-top:0}.quiz-result{text-align:center;padding:20px 5px}.quiz-result-icon{font-size:42px}.quiz-result h3{font-size:25px;margin:8px 0}.quiz-score{font-size:38px;font-weight:800;color:#17384a}.quiz-percent{font-size:18px;margin:3px 0 12px}.quiz-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}.quiz-secondary{background:#e8e5df;color:#26353a}
+
+/* 9.9.38: Mijn positie altijd zwart, onafhankelijk van thema/buttonregels */
+.my-position-button,.my-position-button:visited,.my-position-button:focus,.my-position-button:hover,.my-position-button:active{padding:8px 12px !important;border:1px solid #000 !important;border-radius:9px !important;background:#000 !important;background-color:#000 !important;color:#fff !important;font-weight:700 !important;cursor:pointer !important;box-shadow:none !important;opacity:1 !important;}
+.my-position-button:hover{background:#000 !important;color:#fff !important;}
