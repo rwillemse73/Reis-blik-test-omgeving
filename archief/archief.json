@@ -1,0 +1,15 @@
+{
+  "formatVersion": "1.0",
+  "description": "Register van gearchiveerde Reisblik-vakanties. Voeg hier iedere nieuwe HTML-archiefvakantie toe.",
+  "archieven": [
+    {
+      "id": "evenementen-2026-2026-09-06-2026-09-10",
+      "naam": "Evenementen 2026",
+      "periode": "6 september 2026 t/m 10 september 2026",
+      "bestand": "Evenementen_2026_2026-09-06_tm_2026-09-10.html",
+      "type": "reisdagboek",
+      "omschrijving": "Testarchief van Evenementen 2026.",
+      "toegevoegd": "2026-09-16"
+    }
+  ]
+}

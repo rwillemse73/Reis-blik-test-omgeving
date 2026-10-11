@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reisblik — Vakantiearchief</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e8e5df;
+      color: #202b2f;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.5;
+    }
+    main {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      padding: 28px 24px 44px;
+    }
+    header {
+      background: #e8df73;
+      border-top: 4px solid #1e292d;
+      border-bottom: 4px solid #1e292d;
+      text-align: center;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+    }
+    header h1 { margin: 0; font-size: clamp(32px, 6vw, 54px); }
+    header p { margin: 8px 0 0; font-style: italic; }
+    .terug {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border: 1px solid #8c9999;
+      border-radius: 8px;
+      background: #fff;
+      color: #202b2f;
+      text-decoration: none;
+      font: 700 14px Arial, sans-serif;
+    }
+    .archief-item {
+      background: #fbfaf6;
+      border: 1px solid #d5cec5;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .archief-item h2 { margin: 0 0 5px; font-size: 25px; }
+    .periode { font: 700 13px Arial, sans-serif; color: #596467; }
+    .omschrijving { margin: 10px 0; }
+    .open {
+      display: inline-block;
+      padding: 9px 13px;
+      border-radius: 8px;
+      background: #1e292d;
+      color: #fff;
+      text-decoration: none;
+      font: 700 14px Arial, sans-serif;
+    }
+    .leeg, .fout { background: #fbfaf6; padding: 18px; }
+    @media (max-width: 600px) {
+      main { padding: 14px 12px 30px; }
+      header { padding: 16px 12px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <a class="terug" href="../">← Terug naar Reisblik</a>
+  <header>
+    <h1>Vakantiearchief</h1>
+    <p>Gearchiveerde Reisblik-reizen</p>
+  </header>
+  <section id="archiefLijst"><div class="leeg">Archief wordt geladen…</div></section>
+<p style="margin:28px 0 0;text-align:center;color:#6c777b;font:12px Arial,sans-serif">Reisblik v9.8.18</p>
+</main>
+<script>
+async function laadArchief() {
+  const host = document.getElementById('archiefLijst');
+  try {
+    const response = await fetch('archief.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('archief.json kon niet worden geladen');
+    const data = await response.json();
+    const lijst = Array.isArray(data.archieven) ? data.archieven : [];
+    if (!lijst.length) {
+      host.innerHTML = '<div class="leeg">Er staan nog geen vakanties in het archief.</div>';
+      return;
+    }
+    host.innerHTML = lijst.map(item => `
+      <article class="archief-item">
+        <h2>${escapeHtml(item.naam || 'Vakantie')}</h2>
+        <div class="periode">${escapeHtml(item.periode || '')}</div>
+        <div class="omschrijving">${escapeHtml(item.omschrijving || '')}</div>
+        <a class="open" href="${encodeURI(item.bestand || '#')}">📖 Vakantie openen</a>
+      </article>
+    `).join('');
+  } catch (error) {
+    console.error(error);
+    host.innerHTML = '<div class="fout">Het vakantiearchief kon niet worden geladen.</div>';
+  }
+}
+function escapeHtml(value) {
+  return String(value).replace(/[&<>'"]/g, char => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;'
+  }[char]));
+}
+laadArchief();
+</script>
+</body>
+</html>
